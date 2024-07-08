@@ -2,8 +2,12 @@ import styled from "styled-components";
 
 export const PaymentFormContainer = styled.section`
   max-width: 800px;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 5rem;
+  }
 `;
 
 export const PaymentSuccess = styled.h2`
