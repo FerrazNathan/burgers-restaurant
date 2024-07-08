@@ -36,6 +36,7 @@ const PaymentForm: React.FC = () => {
             <S.FormField>
               <S.Label>Número do Cartão</S.Label>
               <S.Input
+                required
                 type="text"
                 name="cardNumber"
                 value={formData.cardNumber}
@@ -46,6 +47,7 @@ const PaymentForm: React.FC = () => {
             <S.FormField>
               <S.Label>Nome do Titular do Cartão</S.Label>
               <S.Input
+                required
                 type="text"
                 name="cardHolderName"
                 value={formData.cardHolderName}
@@ -56,6 +58,7 @@ const PaymentForm: React.FC = () => {
             <S.FormField>
               <S.Label>Data de Validade</S.Label>
               <S.Input
+                required
                 type="text"
                 name="expiryDate"
                 value={formData.expiryDate}
@@ -66,6 +69,7 @@ const PaymentForm: React.FC = () => {
             <S.FormField>
               <S.Label>CVV</S.Label>
               <S.Input
+                required
                 type="text"
                 name="cvv"
                 value={formData.cvv}
