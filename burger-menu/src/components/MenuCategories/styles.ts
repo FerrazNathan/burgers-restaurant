@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerGeneral = styled.div`
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -10,7 +9,6 @@ export const ContainerGeneral = styled.div`
 
 export const ContainerImage = styled.div`
   display: flex;
-  // justify-content: center;
   align-items: center;
   gap: 2rem;
 
@@ -35,6 +33,11 @@ export const ContainerCategories = styled.div`
   gap: 2rem;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+  }
 
   & button {
     width: 100px;
@@ -135,6 +138,12 @@ export const ContainerModal = styled.div`
   
   & h6 {
     text-align: center;
+  }
+
+  & img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 `
 

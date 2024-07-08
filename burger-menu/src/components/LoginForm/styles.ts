@@ -5,6 +5,8 @@ export const ContainerLoginForm = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  text-align: center;
 
   & p {
     color: #AAA;

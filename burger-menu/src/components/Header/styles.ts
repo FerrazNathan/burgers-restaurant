@@ -20,7 +20,6 @@ export const ContainerHeader = styled.header`
   & img {
     width: 100%;
     max-width: 1440px;
-    // height: 100%;
     object-fit: cover;
     object-position: center;
   
@@ -37,10 +36,9 @@ export const ListMenuHeader = styled.ul`
   font-family: 'Roboto', sans-serif;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 0;
     margin: 0.5rem auto;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 0;
   }
 `;
 
@@ -49,6 +47,10 @@ export const ItemMenuHeader = styled.li`
   width: 232px;  
   position: relative;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 80px;  
+  }
 `
 
 export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
@@ -91,27 +93,13 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         cursor: pointer;
 
         &:after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          width: 150px;
-          height: 2px;
-          background: #FFF;
-          left: -50px;
-          transition: width 0.5s ease;
+          display: none;
         }
       }
 
       ${isActive && css`
         &:after {
-          content: '';
-          position: absolute;
-          bottom: -10px;
-          width: 150px;
-          height: 2px;
-          background: #FFF;
-          left: -50px;
-          transition: width 0.5s ease;
+          display: none;
         }
       `}
     }

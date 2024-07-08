@@ -21,6 +21,7 @@ export const ModalContent = styled.div`
   width: 100%;
   position: relative;
   margin: 0 1rem;
+  width: 95%;
 `;
 
 export const CloseButton = styled.button`

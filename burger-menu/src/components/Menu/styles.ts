@@ -32,6 +32,6 @@ export const ContainerRight = styled.div`
   box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
 
   @media (max-width: 768px) {
-    width: 90%;
+    width: 100%;
   }
 `;
