@@ -128,6 +128,11 @@ export const ContainerImageAccordionDetails = styled.figure`
   & img {
     object-fit: cover;
     object-position: center;
+
+    @media (max-width: 768px) {
+      width: 230px;
+      height: 120px;  
+    }
   }
 `
 
