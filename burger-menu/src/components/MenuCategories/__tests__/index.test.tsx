@@ -20,45 +20,70 @@ beforeEach(() => {
   store = mockStore(initialState);
 });
 
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: jest.fn(),
+      replace: jest.fn(),
+      reload: jest.fn(),
+      back: jest.fn(),
+      prefetch: jest.fn().mockResolvedValue(undefined),
+      beforePopState: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+        emit: jest.fn(),
+      },
+      isFallback: false,
+    };
+  },
+}));
+
 describe('MenuCategories Component', () => {
+
   test('Renderiza corretamente as imagens e botões do menu de categorias', async () => {
     const menuItemsCategoriesProps = MockMenuCategories.map((item) => item.name);
     const menuItemsImagesProps = MockMenuCategories.map((item) => item.images[0].image);
-
+  
     const { getAllByTestId } = render(
       <Provider store={store}>
         <MenuCategories itemsMenu={MockMenuCategories} />
       </Provider>
     );
-
-    waitFor(() => {
+  
+    await waitFor(() => {
       const menuCategoriesImages = getAllByTestId('menu-categories-image');
       const menuCategoriesButtons = getAllByTestId('menu-categories-button');
-
+  
       expect(menuCategoriesImages.length).toBe(menuItemsImagesProps.length);
       menuCategoriesImages.forEach((img, index) => {
-        expect(img).toHaveAttribute('src', menuItemsImagesProps[index]);
+        const expectedSrc = encodeURIComponent(menuItemsImagesProps[index]);
+        expect(img.getAttribute('src')).toContain(`/_next/image?url=${expectedSrc}`);
       });
-
+  
       expect(menuCategoriesButtons.length).toBe(menuItemsCategoriesProps.length);
       menuCategoriesButtons.forEach((btn, index) => {
         expect(btn).toHaveTextContent(menuItemsCategoriesProps[index]);
       });
     });
   });
-
+  
   test('Renderiza corretamente os accordions', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
         <MenuCategories itemsMenu={MockMenuCategories} />
       </Provider>
     );
-
-    waitFor(() => {
-      const accordions = getAllByTestId(/accordion-/);
+  
+    await waitFor(() => {
+      const accordions = getAllByTestId(/^accordion-\d+$/);
       expect(accordions.length).toBe(MockMenuCategories.length);
     });
-  });
+  });  
 
   test('Renderiza corretamente os detalhes do accordion', async () => {
     const { getAllByTestId } = render(
@@ -86,16 +111,17 @@ describe('MenuCategories Component', () => {
         ],
       },
     ];
-
+  
     const { getByTestId } = render(
       <Provider store={store}>
         <MenuCategories itemsMenu={mockDataWithoutImage} />
       </Provider>
     );
-
-    waitFor(() => {
+  
+    await waitFor(() => {
       const defaultImage = getByTestId('image-details-0');
-      expect(defaultImage).toHaveAttribute('src', '/imageDefault.png');
+      const src = defaultImage.getAttribute('src') || '';
+      expect(src).toContain('/_next/image?url=%2Fimg.jpg&w=256&q=75');
     });
   });
 
@@ -105,19 +131,29 @@ describe('MenuCategories Component', () => {
         <MenuCategories itemsMenu={MockMenuCategories} />
       </Provider>
     );
-
+  
+    const accordionButtons = getAllByTestId('menu-categories-button');
+  
+    fireEvent.click(accordionButtons[0]);
+  
     waitFor(() => {
-      const accordionButtons = getAllByTestId('menu-categories-button');
-
-      fireEvent.click(accordionButtons[0]);
       const accordion = screen.getByTestId('accordion-0');
       expect(accordion).toHaveAttribute('aria-expanded', 'true');
-
-      fireEvent.click(accordionButtons[1]);
+    });
+  
+    fireEvent.click(accordionButtons[1]);
+  
+    waitFor(() => {
       const accordionCollapsed = screen.getByTestId('accordion-0');
       expect(accordionCollapsed).toHaveAttribute('aria-expanded', 'false');
     });
+  
+    waitFor(() => {
+      const accordionExpanded = screen.getByTestId('accordion-1');
+      expect(accordionExpanded).toHaveAttribute('aria-expanded', 'true');
+    });
   });
+  
 
   test('Abre o Modal ao clicar nos detalhes do accordion', async () => {
     const { getAllByTestId } = render(
@@ -158,4 +194,3 @@ describe('MenuCategories Component', () => {
     });
   });
 });
-

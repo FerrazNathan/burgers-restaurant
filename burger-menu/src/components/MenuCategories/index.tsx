@@ -73,13 +73,11 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         <S.ContainerImage>
           {itemsMenu?.map((item, index) => (
             <Image 
-              key={item.images[0].image} 
+              key={index} 
               src={item.images[0].image} 
               alt="menu"
               width={100}
               height={100}
-              objectFit='cover'
-              objectPosition='center'
               data-testid='menu-categories-image' 
               onClick={() => handleCategoryClick(index)}
             />
@@ -89,7 +87,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         <S.ContainerCategories>
           {itemsMenu?.map((item, index) => (
             <button 
-              key={item.name}
+              key={item.name || index}
               data-testid='menu-categories-button' 
               onClick={() => handleCategoryClick(index)}
             >
@@ -103,7 +101,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
             const panelId = `panel${index + 1}`;
             return (
               <Accordion
-                key={item.id}
+                key={item.id || index}
                 expanded={expanded === panelId}
                 onChange={handleChange(panelId)}
                 data-testid={`accordion-${index}`}
@@ -117,9 +115,9 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
                     {item.name}
                   </Typography>
                 </AccordionSummary>
-                {item.items.map((subItem: ItemProps) => (
+                {item.items.map((subItem: ItemProps, index: number) => (
                   <AccordionDetails 
-                    key={subItem.id} 
+                    key={subItem.id || index} 
                     data-testid={`accordion-details-${index}`} 
                     onClick={() => openModal(subItem)}
                   >
@@ -141,8 +139,6 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
                           alt="menu"
                           width={128}
                           height={85}
-                          objectFit='cover'
-                          objectPosition='center'
                           data-testid={`image-details-${index}`}
                         />
                       </S.ContainerImageAccordionDetails>
@@ -163,8 +159,6 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
               alt="menu"
               width={465}
               height={200}
-              objectFit='cover'
-              objectPosition='center'
             />
             <Typography variant="h4" component="h2">
               {selectedItem.name}
