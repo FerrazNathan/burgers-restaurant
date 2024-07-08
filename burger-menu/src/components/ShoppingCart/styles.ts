@@ -11,6 +11,10 @@ export const ContainerCart = styled.section`
     font-size: 1.125rem;
     font-weight: bold;
   }
+
+  & h2 {
+    text-align: center;
+  }
 `;
 
 export const ProductsList = styled.ul`

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { RootState } from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { increaseItemQuantity, decreaseItemQuantity, clearCart } from '../../store/cartSlice';
@@ -14,6 +15,7 @@ const ShoppingCart: React.FC = () => {
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleCheckout = () => {
     setCheckoutSuccess(true);
@@ -21,6 +23,7 @@ const ShoppingCart: React.FC = () => {
     setTimeout(() => {
       dispatch(clearCart());
       setCheckoutSuccess(false);
+      router.push('/payment');
     }, 4000);
   };
 
@@ -29,35 +32,40 @@ const ShoppingCart: React.FC = () => {
   return (
     <S.ContainerCart>
       <h2>Carrinho</h2>
-      {checkoutSuccess && <span>Compra realizada com sucesso!</span>}
-      <S.ProductsList>
-        {items.map(item => (
-          <S.ProductsListItem key={item.id}>
-            <span>{item.name}</span>
-            <S.ContainerButtons>
-              <S.ButtonRemove 
-                onClick={() => dispatch(decreaseItemQuantity(item.id))}
-              >
-                <GrSubtractCircle size={sizeIcon} />
-              </S.ButtonRemove>
-                <span>{item.quantity}</span>
-              <S.ButtonRemove 
-                onClick={() => dispatch(increaseItemQuantity(item.id))}
-              >
-                <MdAddCircleOutline size={sizeIcon} />
-              </S.ButtonRemove>
-            </S.ContainerButtons>
-            <span>{formatPrice(item.price)}</span>
-          </S.ProductsListItem>
-        ))}
-      </S.ProductsList>
+      {checkoutSuccess && <h2>Você será redirecionado para a página de pagamentos!</h2>}
+      {!checkoutSuccess && (
+        <S.ProductsList>
+          {items.map(item => (
+            <S.ProductsListItem key={item.id}>
+              <span>{item.name}</span>
+              <S.ContainerButtons>
+                <S.ButtonRemove 
+                  onClick={() => dispatch(decreaseItemQuantity(item.id))}
+                >
+                  <GrSubtractCircle size={sizeIcon} />
+                </S.ButtonRemove>
+                  <span>{item.quantity}</span>
+                <S.ButtonRemove 
+                  onClick={() => dispatch(increaseItemQuantity(item.id))}
+                >
+                  <MdAddCircleOutline size={sizeIcon} />
+                </S.ButtonRemove>
+              </S.ContainerButtons>
+              <span>{formatPrice(item.price)}</span>
+            </S.ProductsListItem>
+          ))}
+        </S.ProductsList>
+      )}
     
+    {!checkoutSuccess && (
       <S.ContainerFinally>
         <span>Total: {formatPrice(totalPrice)}</span>
         <button disabled={totalQuantity < 1} onClick={handleCheckout}>
           Finalizar compra
         </button>
       </S.ContainerFinally>
+    )}
+
     </S.ContainerCart>
   );
 };
