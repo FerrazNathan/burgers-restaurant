@@ -12,6 +12,7 @@ export const PaymentFormContainer = styled.section`
 
 export const PaymentSuccess = styled.h2`
   text-align: center;
+  margin-top: 0;
 `
 
 export const FormContainer = styled.div`
@@ -20,6 +21,8 @@ export const FormContainer = styled.div`
   padding: 1rem;
   box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
   border-radius: 0.5rem;
+
+
 `;
 
 export const FormField = styled.div`

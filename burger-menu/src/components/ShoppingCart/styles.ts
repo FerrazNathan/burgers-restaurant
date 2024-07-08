@@ -14,6 +14,7 @@ export const ContainerCart = styled.section`
 
   & h2 {
     text-align: center;
+    margin: 0 auto;
   }
 `;
 

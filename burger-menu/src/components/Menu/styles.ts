@@ -7,8 +7,9 @@ export const ContainerMenu = styled.div`
   margin-bottom: 4rem;
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin-bottom: 6rem;
+    gap: 1rem;
   }
 `;
 

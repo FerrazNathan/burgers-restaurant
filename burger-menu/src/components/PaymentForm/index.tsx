@@ -31,7 +31,7 @@ const PaymentForm: React.FC = () => {
       {verifyPayment && <S.PaymentSuccess>Pagamento efetuado com sucesso!</S.PaymentSuccess>}
       {!verifyPayment && (
         <S.FormContainer>
-          <h2>Formulário de Pagamento</h2>
+          <S.PaymentSuccess>Formulário de Pagamento</S.PaymentSuccess>
           <form onSubmit={handleSubmit}>
             <S.FormField>
               <S.Label>Número do Cartão</S.Label>
