@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   return (
     <> 
       <Header activePage="Menu" />  
-      <Menu itemsMenu={response?.sections} />
+      <Menu itemsMenu={response} />
       <Footer />
     </>
   )

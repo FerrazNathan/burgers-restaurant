@@ -10,7 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ImageDefault from '../../public/imageDefault.png';
-import { MenuTypes, ItemProps } from '../Menu/Menu.types';
+import { MenuTypes, ProductsProps } from '../Menu/Menu.types';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';
@@ -20,13 +20,12 @@ import * as S from './styles';
 const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
   const [expanded, setExpanded] = useState<string | false>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemProps | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ProductsProps | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const openModal = (item: ItemProps) => {
+  const openModal = (item: ProductsProps) => {
     setSelectedItem(item);
     setIsModalOpen(true);
     setQuantity(1);
@@ -56,7 +55,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
 
   const handleAddToCart = () => {
     if (selectedItem) {
-      dispatch(addItem({ ...selectedItem, id: selectedItem.id.toString(), quantity }));
+      dispatch(addItem({ ...selectedItem, id: selectedItem.id.toString(), quantity, price: selectedItem.price }));  
       closeModal();
     }
   };
@@ -71,10 +70,10 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
     <React.Fragment>
       <S.ContainerGeneral>
         <S.ContainerImage>
-          {itemsMenu?.map((item, index) => (
+          {itemsMenu?.categories.map((item, index) => (
             <Image 
               key={index} 
-              src={item.images[0].image} 
+              src={item.image} 
               alt="menu"
               width={100}
               height={100}
@@ -85,19 +84,19 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         </S.ContainerImage>
       
         <S.ContainerCategories>
-          {itemsMenu?.map((item, index) => (
+          {itemsMenu?.categories.map((item, index) => (
             <button 
-              key={item.name || index}
+              key={item.category || index}
               data-testid='menu-categories-button' 
               onClick={() => handleCategoryClick(index)}
             >
-              {item.name}
+              {item.category}
             </button>
           ))}
         </S.ContainerCategories>
 
         <S.ContainerListMenu>
-          {itemsMenu?.map((item, index) => {
+          {itemsMenu?.categories.map((item, index) => {
             const panelId = `panel${index + 1}`;
             return (
               <Accordion
@@ -111,11 +110,11 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
                   aria-controls={`${panelId}bh-content`}
                   id={`${panelId}bh-header`}
                 >
-                  <Typography sx={{ width: '33%', flexShrink: 0, fontWeight: 'bold' }}>
-                    {item.name}
+                  <Typography sx={{ width: '33%', flexShrink: 0, fontWeight: 'bold', textTransform: 'capitalize' }}>
+                    {item.category}
                   </Typography>
                 </AccordionSummary>
-                {item.items.map((subItem: ItemProps, index: number) => (
+                {item.products.map((subItem: ProductsProps, index: number) => (
                   <AccordionDetails 
                     key={subItem.id || index} 
                     data-testid={`accordion-details-${index}`} 
@@ -135,7 +134,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
                       </S.ContainerTitleDescriptionAndPrice>
                       <S.ContainerImageAccordionDetails>
                         <Image 
-                          src={subItem && subItem?.images && subItem?.images[0]?.image || ImageDefault} 
+                          src={subItem && subItem?.image && subItem?.image} 
                           alt="menu"
                           width={128}
                           height={85}
@@ -155,7 +154,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         {selectedItem && (
           <S.ContainerModal>
             <Image 
-              src={selectedItem && selectedItem?.images && selectedItem?.images[0]?.image || ImageDefault}
+              src={selectedItem && selectedItem?.image && selectedItem?.image}
               alt="menu"
               width={465}
               height={200}

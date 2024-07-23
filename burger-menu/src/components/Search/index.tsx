@@ -9,6 +9,7 @@ import * as S from './styles'
 const Search: React.FC<SearchProps> = ({ optionsMessage = '', onItemSelect }) => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
 
   const debounce = (fn: (...args: any[]) => void, delay = 250) => {
     let timeout: NodeJS.Timeout;
@@ -27,8 +28,8 @@ const Search: React.FC<SearchProps> = ({ optionsMessage = '', onItemSelect }) =>
         try {
           const response = await getMenu();
           
-          if (response && response.sections) {
-            const searchResults: MenuItem[] = response.sections.flatMap((section: any) => section.items);
+          if (response) {
+            const searchResults: MenuItem[] = response.categories.flatMap((section: any) => section.products.flatMap((product: any) => product));
             const filteredResults = searchResults.filter(item =>
               item.name.toLowerCase().includes(inputValue.toLowerCase())
             );
@@ -62,16 +63,19 @@ const Search: React.FC<SearchProps> = ({ optionsMessage = '', onItemSelect }) =>
         instanceId="Select"
         loadOptions={loadOptions}
         loadingMessage={() => 'Buscando ...'}
-        isClearable={false}
+        isClearable={true} // Permite limpar o campo
         placeholder="Busque por itens do cardápio"
         noOptionsMessage={() => errorMessage || optionsMessage}
         className="select"
         classNamePrefix="select"
         aria-label="Barra de pesquisa de cursos"
         tabSelectsValue
+        inputValue={inputValue} // Passa o estado do inputValue
+        onInputChange={(newValue) => setInputValue(newValue)} // Atualiza o estado do inputValue
         onChange={(selectedOption: OptionType | null) => {
           if (selectedOption && selectedOption.item) {
             onItemSelect(selectedOption.item);
+            setInputValue(''); // Limpa o valor do input após seleção
           }
         }}
         components={{
