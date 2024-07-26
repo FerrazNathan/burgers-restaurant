@@ -1,8 +1,8 @@
 export interface MenuTypes {
-  [key: string]: any;
+  [key: string]: MenuTypesProps;
 }
 
-export interface MenuTypesProps {
+export interface MenuTypes {
   categories: CategoryProps[];
 }
 

@@ -2,14 +2,14 @@ import React, { useRef } from 'react';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 
-import { MenuCategories } from "../MenuCategories";
+import { MenuCategories } from "../../components/MenuCategories";
 import { ProductsProps, MenuTypes, MenuCategoriesRef } from './Menu.types';
 import { Search } from '@/components/Search';
 import { ShoppingCart } from '@/components/ShoppingCart';
 
 import * as S from './styles'
 
-function Menu({ itemsMenu }: MenuTypes) {    
+function SectionMenu({ itemsMenu }: MenuTypes) {    
   const menuCategoriesRef = useRef<MenuCategoriesRef>(null);
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
 
@@ -36,4 +36,4 @@ function Menu({ itemsMenu }: MenuTypes) {
   );
 }
 
-export { Menu };
+export { SectionMenu };

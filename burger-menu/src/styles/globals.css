@@ -7,6 +7,7 @@ body {
   margin: 0 auto;
   width: 100%;
   background: #FCFCFC;
+  height: 100%;
 }
 
 a {
@@ -25,5 +26,6 @@ a {
   body {
     color: white;
     background: #383838;
+    height: 100%;
   }
 }

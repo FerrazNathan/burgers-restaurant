@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { Menu } from '@/components/Menu'
+import { SectionMenu } from '../sections/SectionMenu'
 
 import { getMenu } from '../services/menu'
 
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   return (
     <> 
       <Header activePage="Menu" />  
-      <Menu itemsMenu={response} />
+        <SectionMenu itemsMenu={response} categories={[]} />
       <Footer />
     </>
   )
