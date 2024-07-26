@@ -21,18 +21,37 @@ export const ContainerCart = styled.section`
 export const ProductsList = styled.ul`
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `
 
 export const ProductsListItem = styled.li`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
+
+  & span {
+    width: 100%;
+    
+    &:first-child {
+      text-align: left;
+      max-width: 200px;
+    }
+
+    &:nth-child(3) {
+      text-align: end;
+      max-width: 100px;
+    }
+  }
 `
 
 export const ContainerButtons = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  max-width: 75px;
 `
 
 export const ButtonRemove = styled.button`

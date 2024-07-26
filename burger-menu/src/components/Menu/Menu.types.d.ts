@@ -1,5 +1,5 @@
 export interface MenuTypes {
-  [key: string]: MenuTypesProps;
+  [key: string]: any;
 }
 
 export interface MenuTypesProps {
@@ -19,4 +19,8 @@ export interface ProductsProps {
   image: string;
   name: string;
   price: number;
+}
+
+export interface MenuCategoriesRef {
+  openModal: (item: ProductsProps) => void;
 }

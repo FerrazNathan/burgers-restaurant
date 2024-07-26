@@ -27,7 +27,6 @@ const Search: React.FC<SearchProps> = ({ optionsMessage = '', onItemSelect }) =>
         setLoading(true);
         try {
           const response = await getMenu();
-          
           if (response) {
             const searchResults: MenuItem[] = response.categories.flatMap((section: any) => section.products.flatMap((product: any) => product));
             const filteredResults = searchResults.filter(item =>

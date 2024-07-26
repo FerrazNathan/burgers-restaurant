@@ -19,7 +19,7 @@ const ShoppingCart: React.FC = () => {
 
   const handleCheckout = () => {
     setCheckoutSuccess(true);
-    
+
     setTimeout(() => {
       dispatch(clearCart());
       setCheckoutSuccess(false);
@@ -28,7 +28,7 @@ const ShoppingCart: React.FC = () => {
   };
 
   const sizeIcon = 20;
-
+  
   return (
     <S.ContainerCart>
       <h2>Carrinho</h2>
@@ -42,13 +42,13 @@ const ShoppingCart: React.FC = () => {
                 <S.ButtonRemove 
                   onClick={() => dispatch(decreaseItemQuantity(item.id))}
                 >
-                  <GrSubtractCircle size={sizeIcon} />
+                  <GrSubtractCircle size={sizeIcon} color='red' />
                 </S.ButtonRemove>
-                  <span>{item.quantity}</span>
+                <span>{item.quantity}</span>
                 <S.ButtonRemove 
                   onClick={() => dispatch(increaseItemQuantity(item.id))}
                 >
-                  <MdAddCircleOutline size={sizeIcon} />
+                  <MdAddCircleOutline size={sizeIcon} color='green' />
                 </S.ButtonRemove>
               </S.ContainerButtons>
               <span>{formatPrice(item.price)}</span>
@@ -56,18 +56,18 @@ const ShoppingCart: React.FC = () => {
           ))}
         </S.ProductsList>
       )}
-    
-    {!checkoutSuccess && (
-      <S.ContainerFinally>
-        <span>Total: {formatPrice(totalPrice)}</span>
-        <button disabled={totalQuantity < 1} onClick={handleCheckout}>
-          Finalizar compra
-        </button>
-      </S.ContainerFinally>
-    )}
 
+      {!checkoutSuccess && (
+        <S.ContainerFinally>
+          <span>Total: {formatPrice(totalPrice)}</span>
+          <button disabled={totalQuantity < 1} onClick={handleCheckout}>
+            Finalizar compra
+          </button>
+        </S.ContainerFinally>
+      )}
     </S.ContainerCart>
   );
 };
 
 export { ShoppingCart };
+

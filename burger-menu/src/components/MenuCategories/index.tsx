@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useEffect, Ref } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -9,15 +9,14 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import ImageDefault from '../../public/imageDefault.png';
-import { MenuTypes, ProductsProps } from '../Menu/Menu.types';
+import { MenuTypes, ProductsProps, MenuCategoriesRef } from '../Menu/Menu.types';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';
 
 import * as S from './styles';
 
-const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
+const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, ref) => {
   const [expanded, setExpanded] = useState<string | false>(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ProductsProps | null>(null);
@@ -25,6 +24,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const router = useRouter();
+console.log(itemsMenu, 'itemsMenu')
   const openModal = (item: ProductsProps) => {
     setSelectedItem(item);
     setIsModalOpen(true);
@@ -62,7 +62,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
 
   useImperativeHandle(ref, () => ({
     openModal,
-  }));
+  }), [openModal]);
 
   const sizeIcon = 32;
 
@@ -70,7 +70,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
     <React.Fragment>
       <S.ContainerGeneral>
         <S.ContainerImage>
-          {itemsMenu?.categories.map((item, index) => (
+          {itemsMenu?.categories.map((item: any, index: number) => (
             <Image 
               key={index} 
               src={item.image} 
@@ -84,7 +84,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         </S.ContainerImage>
       
         <S.ContainerCategories>
-          {itemsMenu?.categories.map((item, index) => (
+          {itemsMenu?.categories.map((item: any, index: number) => (
             <button 
               key={item.category || index}
               data-testid='menu-categories-button' 
@@ -96,7 +96,7 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
         </S.ContainerCategories>
 
         <S.ContainerListMenu>
-          {itemsMenu?.categories.map((item, index) => {
+          {itemsMenu?.categories.map((item: any, index: number) => {
             const panelId = `panel${index + 1}`;
             return (
               <Accordion
@@ -176,13 +176,13 @@ const MenuCategories = forwardRef(({ itemsMenu }: MenuTypes, ref) => {
                     onClick={() => setQuantity(quantity - 1)}
                     disabled={quantity <= 0}
                   >
-                    <GrSubtractCircle size={sizeIcon} />
+                    <GrSubtractCircle size={sizeIcon} color='red' />
                   </button>
                   <span>{quantity}</span>
                   <button 
                     onClick={() => setQuantity(quantity + 1)}
                   >
-                    <MdAddCircleOutline size={sizeIcon} />
+                    <MdAddCircleOutline size={sizeIcon} color='green' />
                   </button>
                 </S.ContainerModalQuantity>
                 <S.ButtonAddTocart onClick={handleAddToCart}>Adicionar ao Carrinho</S.ButtonAddTocart>
