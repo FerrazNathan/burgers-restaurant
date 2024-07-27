@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
         setMessage('Conta criada com sucesso!');
       }
     } catch (error) {
-      console.error('Erro ao criar conta:', error);
+      console.error('Erro ao criar conta:');
       setMessage('Ocorreu um erro ao criar a conta. Tente novamente mais tarde.');
     } finally {
       setName('');
@@ -171,7 +171,6 @@ const LoginForm: React.FC = () => {
             </button>
           </S.ContainerButtonLogin>
           {message && <p>{message}</p>}
-          {loading && <p>Carregando...</p>}
         </S.ContainerLoginForm>
       )}
     </S.ContainerSection>

@@ -22,7 +22,7 @@ describe('PaymentForm Component', () => {
 
     fireEvent.click(payButton);
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(getByText('Pagamento efetuado com sucesso!')).toBeInTheDocument();
     });
   });

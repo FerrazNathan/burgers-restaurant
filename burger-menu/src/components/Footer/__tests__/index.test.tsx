@@ -18,7 +18,7 @@ describe("Footer Component", () => {
 
     expect(copyrightText).toBeInTheDocument();
     expect(copyrightText).toHaveTextContent(
-      "© Nathan Ferraz - 2024 - Todos os direitos reservados"
+      "© Nathan Ferraz - Todos os direitos reservados"
     );
   });
 })

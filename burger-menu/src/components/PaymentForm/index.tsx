@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import InputMask from 'react-input-mask';
+import { Loading } from '../Loading';
 
 import * as S from './styles';
 
@@ -28,20 +30,26 @@ const PaymentForm: React.FC = () => {
 
   return (
     <S.PaymentFormContainer>
-      {verifyPayment && <S.PaymentSuccess>Pagamento efetuado com sucesso!</S.PaymentSuccess>}
+      {verifyPayment && (
+        <S.ContainerMessageLoading>
+          <S.PaymentSuccess>Transação em Andamento. Você receberá uma atualização do seu banco com o status da sua transação.</S.PaymentSuccess>
+          <Loading description='Carregando ...' />
+        </S.ContainerMessageLoading>
+      )}
       {!verifyPayment && (
         <S.FormContainer>
           <S.PaymentSuccess>Formulário de Pagamento</S.PaymentSuccess>
           <form onSubmit={handleSubmit}>
             <S.FormField>
               <S.Label>Número do Cartão</S.Label>
-              <S.Input
-                required
-                type="text"
-                name="cardNumber"
+              <InputMask
+                mask="9999 9999 9999 9999"
+                maskChar=" "
                 value={formData.cardNumber}
                 onChange={handleChange}
+                name="cardNumber"
                 placeholder="1234 5678 9101 1121"
+                className='input-mask'
               />
             </S.FormField>
             <S.FormField>
@@ -57,24 +65,24 @@ const PaymentForm: React.FC = () => {
             </S.FormField>
             <S.FormField>
               <S.Label>Data de Validade</S.Label>
-              <S.Input
-                required
-                type="text"
-                name="expiryDate"
+              <InputMask
+                mask="99/99"
                 value={formData.expiryDate}
                 onChange={handleChange}
+                name="expiryDate"
                 placeholder="MM/AA"
+                className='input-mask'
               />
             </S.FormField>
             <S.FormField>
               <S.Label>CVV</S.Label>
-              <S.Input
-                required
-                type="text"
-                name="cvv"
+              <InputMask
+                mask="999"
                 value={formData.cvv}
                 onChange={handleChange}
+                name="cvv"
                 placeholder="123"
+                className='input-mask'
               />
             </S.FormField>
             <S.Button type="submit">Pagar</S.Button>

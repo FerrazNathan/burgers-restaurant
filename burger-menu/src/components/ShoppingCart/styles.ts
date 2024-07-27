@@ -18,6 +18,13 @@ export const ContainerCart = styled.section`
   }
 `;
 
+export const ContainerMessageLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+`
+
 export const ProductsList = styled.ul`
   list-style: none;
   padding: 0;

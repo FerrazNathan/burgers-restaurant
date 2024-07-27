@@ -6,6 +6,7 @@ import { increaseItemQuantity, decreaseItemQuantity, clearCart } from '../../sto
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
+import { Loading } from '../Loading';
 
 import * as S from './styles';
 
@@ -31,8 +32,13 @@ const ShoppingCart: React.FC = () => {
   
   return (
     <S.ContainerCart>
-      <h2>Carrinho</h2>
-      {checkoutSuccess && <h2>Você será redirecionado para a página de pagamentos!</h2>}
+      {!checkoutSuccess && <h2>Carrinho</h2>}
+      {checkoutSuccess && (
+        <S.ContainerMessageLoading>
+          <h2>Você será redirecionado para a página de pagamentos!</h2>
+          <Loading description='Carregando ...' />
+        </S.ContainerMessageLoading>
+      )}
       {!checkoutSuccess && (
         <S.ProductsList>
           {items.map(item => (

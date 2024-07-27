@@ -18,5 +18,7 @@ export const CopyrightText = styled.p`
   font-weight: 400;
   color: #FFF;
   text-align: center;
+  padding: 0.5rem 1rem;
+  margin: 0;
 `
 

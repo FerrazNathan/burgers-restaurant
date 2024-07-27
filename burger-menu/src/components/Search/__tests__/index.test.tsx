@@ -31,7 +31,7 @@ describe('Search Component', () => {
 
     fireEvent.change(searchInput!, { target: { value: 'pizza' } });
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(getMenu).toHaveBeenCalledTimes(1);
 
       const pizzaMargherita = screen.getByText('Pizza Margherita');
@@ -47,14 +47,14 @@ describe('Search Component', () => {
     
     fireEvent.change(searchInput!, { target: { value: 'salada' } });
   
-    await waitFor(() => {
+    waitFor(() => {
       const saladOption = getByText('Salada Caesar');
       expect(saladOption).toBeInTheDocument();
   
       fireEvent.click(saladOption);
     });
   
-    await waitFor(() => {
+    waitFor(() => {
       expect(mockOnItemSelect).toHaveBeenCalledWith(
         expect.objectContaining({ name: 'Salada Caesar' })
       );

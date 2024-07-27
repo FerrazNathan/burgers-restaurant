@@ -24,7 +24,6 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const router = useRouter();
-console.log(itemsMenu, 'itemsMenu')
   const openModal = (item: ProductsProps) => {
     setSelectedItem(item);
     setIsModalOpen(true);
