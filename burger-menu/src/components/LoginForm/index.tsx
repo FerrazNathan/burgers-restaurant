@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { LoginFormProps } from './LoginForm.types';
+import { Loading } from '../Loading';
+import axios from 'axios';
 
 import * as S from './styles';
 
 const LoginForm: React.FC = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -25,6 +27,10 @@ const LoginForm: React.FC = () => {
     setMessage('');
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -33,31 +39,55 @@ const LoginForm: React.FC = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]') as LoginFormProps[];
-    const user = users.find((u) => u.email === email && u.password === password);
+  const endpoint = 'https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/clients.json';
 
-    if (user) {
-      sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-      setMessage('Login realizado com sucesso!');
-      setLoading(true);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.get(endpoint);
+      const users = response.data;
+      const user = Object.keys(users).find(key => 
+        users[key].email === email && users[key].password === password
+      );
+
+      if (user) {
+        sessionStorage.setItem('loggedInUser', JSON.stringify(users[user]));
+        setMessage('Login realizado com sucesso!');
+        setLoading(true);
         router.push('/');
-    } else {
-      setMessage('Email ou senha inválidos.');
-    }
+      } else {
+        setMessage('Email ou senha inválidos.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:');
+      setMessage('Ocorreu um erro ao fazer login. Tente novamente mais tarde.');
+    } finally {
+      setName('');
+      setEmail('');
+      setPassword('');
+    }    
   };
 
-  const handleSignUp = () => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]') as LoginFormProps[];
-    const userExists = users.some((u) => u.email === email);
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.get(endpoint);
+      const users = response.data;
 
-    if (userExists) {
-      setMessage('Usuário já existe.');
-    } else {
-      const newUser = { email, password };
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-      setMessage('Conta criada com sucesso!');
+      const userExists = Object.values(users).some((u: any) => u.email === email);
+
+      if (userExists) {
+        setMessage('Usuário já existe.');
+      } else {
+        const newUser = { email, password, isAdmin: false, name: name };
+        await axios.post(endpoint, newUser);
+        setMessage('Conta criada com sucesso!');
+      }
+    } catch (error) {
+      console.error('Erro ao criar conta:', error);
+      setMessage('Ocorreu um erro ao criar a conta. Tente novamente mais tarde.');
+    } finally {
+      setName('');
+      setEmail('');
+      setPassword('');
     }
   };
 
@@ -92,42 +122,59 @@ const LoginForm: React.FC = () => {
   }
 
   return (
-    <S.ContainerLoginForm>
-      <h2>{isLoginMode ? 'Entrar' : 'Criar Conta'}</h2>
-      <p>Faça o login para poder utilizar o sistema</p>
-      <S.ContainerForm onSubmit={handleSubmit}>
-        <S.ContainerEmailPassword>
-          <span>Email:</span>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={handleEmailChange}
-            placeholder="E-mail de usuário" 
-            required 
-          />
-        </S.ContainerEmailPassword>
-        <S.ContainerEmailPassword>
-          <span>Senha:</span>
-          <input 
-            type="password" 
-            value={password} 
-            placeholder="Insira a senha"
-            onChange={handlePasswordChange} 
-            required 
-          />
-        </S.ContainerEmailPassword>
-        <S.ContainerButtonSubmit>
-          <button type="submit">{isLoginMode ? 'Entrar' : 'Criar Conta'}</button>
-        </S.ContainerButtonSubmit>
-      </S.ContainerForm>
-      <S.ContainerButtonLogin>
-        <button onClick={handleSwitchMode}>
-          {isLoginMode ? 'Criar uma conta' : 'Já tem uma conta? Entrar'}
-        </button>
-      </S.ContainerButtonLogin>
-      {message && <p>{message}</p>}
-      {loading && <p>Carregando...</p>}
-    </S.ContainerLoginForm>
+    <S.ContainerSection>
+      {loading && <Loading description='Carregando ...' />}
+      {!loading && (
+        <S.ContainerLoginForm>
+          <h2>{isLoginMode ? 'Entrar' : 'Criar Conta'}</h2>
+          <p>Faça o login para poder utilizar o sistema</p>
+          <S.ContainerForm onSubmit={handleSubmit}>
+            {!isLoginMode && (
+              <S.ContainerEmailPassword>
+                <span>Nome:</span>
+                <input 
+                  type="text" 
+                  value={name} 
+                  onChange={handleNameChange}
+                  placeholder="Nome de usuário" 
+                  required 
+                />
+              </S.ContainerEmailPassword>
+            )}
+            <S.ContainerEmailPassword>
+              <span>Email:</span>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={handleEmailChange}
+                placeholder="E-mail de usuário" 
+                required 
+              />
+            </S.ContainerEmailPassword>
+            <S.ContainerEmailPassword>
+              <span>Senha:</span>
+              <input 
+                type="password" 
+                value={password} 
+                placeholder="Insira a senha"
+                onChange={handlePasswordChange} 
+                required 
+              />
+            </S.ContainerEmailPassword>
+            <S.ContainerButtonSubmit>
+              <button type="submit">{isLoginMode ? 'Entrar' : 'Criar Conta'}</button>
+            </S.ContainerButtonSubmit>
+          </S.ContainerForm>
+          <S.ContainerButtonLogin>
+            <button onClick={handleSwitchMode}>
+              {isLoginMode ? 'Criar uma conta' : 'Já tem uma conta? Entrar'}
+            </button>
+          </S.ContainerButtonLogin>
+          {message && <p>{message}</p>}
+          {loading && <p>Carregando...</p>}
+        </S.ContainerLoginForm>
+      )}
+    </S.ContainerSection>
   );
 };
 

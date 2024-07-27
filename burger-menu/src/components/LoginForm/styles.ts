@@ -1,6 +1,18 @@
 import styled from "styled-components";
 
-export const ContainerLoginForm = styled.section`
+export const ContainerSection = styled.section`
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  & svg {
+    position: relative;
+    margin-top: 21%;
+  }
+`
+
+export const ContainerLoginForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

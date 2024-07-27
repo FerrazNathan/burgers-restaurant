@@ -7,10 +7,23 @@ const rotate = keyframes`
   }
 `;
 
+export const ComponentLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  & span {
+    color: #007bff;
+    font-weight: 700;
+  }
+`
+
 export const Loader = styled.svg`
   animation: ${rotate} 1.4s linear infinite;
-  width: 48px;
-  height: 48px;
+  width: 100px;
+  height: 100px;
   position: relative;
 
   .spinnerStop {
