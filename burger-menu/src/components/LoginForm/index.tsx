@@ -48,12 +48,14 @@ const LoginForm: React.FC = () => {
       const user = Object.keys(users).find(key => 
         users[key].email === email && users[key].password === password
       );
-
       if (user) {
-        sessionStorage.setItem('loggedInUser', JSON.stringify(users[user]));
+        sessionStorage.setItem('loggedInUser', JSON.stringify({ isLogged: true }));
         setMessage('Login realizado com sucesso!');
         setLoading(true);
         router.push('/');
+        if(users[user].isAdmin) {
+          sessionStorage.setItem('isAdmin', JSON.stringify({ isAdmin: true }));
+        }
       } else {
         setMessage('Email ou senha inválidos.');
       }

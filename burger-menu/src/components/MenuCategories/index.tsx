@@ -69,7 +69,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
     <React.Fragment>
       <S.ContainerGeneral>
         <S.ContainerImage>
-          {itemsMenu?.categories.map((item: any, index: number) => (
+          {itemsMenu && itemsMenu?.categories.map((item: any, index: number) => (
             <Image 
               key={index} 
               src={item.image} 
@@ -83,7 +83,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
         </S.ContainerImage>
       
         <S.ContainerCategories>
-          {itemsMenu?.categories.map((item: any, index: number) => (
+          {itemsMenu && itemsMenu?.categories.map((item: any, index: number) => (
             <button 
               key={item.category || index}
               data-testid='menu-categories-button' 
@@ -113,7 +113,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
                     {item.category}
                   </Typography>
                 </AccordionSummary>
-                {item.products.map((subItem: ProductsProps, index: number) => (
+                {item.products && item.products.map((subItem: ProductsProps, index: number) => (
                   <AccordionDetails 
                     key={subItem.id || index} 
                     data-testid={`accordion-details-${index}`} 

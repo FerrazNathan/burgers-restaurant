@@ -1,10 +1,37 @@
 import styled from 'styled-components';
 
-export const ContainerMenu = styled.div`
+export const SectionMenu = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem;
+  margin: 0 auto;
+`;
+
+export const ButtonRedirect = styled.button`
+  margin 0 auto;
+  max-width: 220px;
+  text-align: center;
+  border: none;
+  background: #4F372F;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  &:hover {
+    background: #63453b;
+  }
+`
+
+export const ContainerMenu = styled.div`
   display: flex;
   gap: 2rem;
   margin-bottom: 4rem;
+  width: 100%;
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
