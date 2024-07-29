@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import { MenuTypes, ProductsProps, MenuCategoriesRef } from '../../sections/SectionMenu/Menu.types';
+import { MenuTypes, ProductsProps, MenuCategoriesRef } from '../../interface/Menu.types';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';

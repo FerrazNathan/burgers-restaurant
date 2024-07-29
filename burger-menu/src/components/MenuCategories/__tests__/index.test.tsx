@@ -5,7 +5,7 @@ import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 import { MenuCategories } from '../index';
-import { MockMenuCategoriesWithModifiers } from '../Mock/MenuCategories';
+import { MockResponse } from '../../../__mocks__/mockResponse';
 
 type DispatchExts = ThunkDispatch<{}, undefined, Action>;
 
@@ -45,12 +45,12 @@ jest.mock('next/router', () => ({
 
 describe('MenuCategories Component', () => {
   test('Renderiza corretamente as imagens e botões do menu de categorias', async () => {
-    const menuItemsCategoriesProps = MockMenuCategoriesWithModifiers.categories.map((item) => item.category);
-    const menuItemsImagesProps = MockMenuCategoriesWithModifiers.categories.map((item) => item.image);
+    const menuItemsCategoriesProps = MockResponse.categories.map((item) => item.category);
+    const menuItemsImagesProps = MockResponse.categories.map((item) => item.image);
   
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
   
@@ -74,26 +74,26 @@ describe('MenuCategories Component', () => {
   test('Renderiza corretamente os accordions', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
   
     await waitFor(() => {
       const accordions = getAllByTestId(/^accordion-\d+$/);
-      expect(accordions.length).toBe(MockMenuCategoriesWithModifiers.categories.length);
+      expect(accordions.length).toBe(MockResponse.categories.length);
     });
   });  
 
   test('Renderiza corretamente os detalhes do accordion', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
 
     await waitFor(() => {
       const accordionDetails = getAllByTestId(/accordion-details-/);
-      const allItems = MockMenuCategoriesWithModifiers.categories.flatMap((item) => item.products.map((product) => product.name));
+      const allItems = MockResponse.categories.flatMap((item) => item.products.map((product) => product.name));
       expect(accordionDetails.length).toBe(allItems.length);
     });
   });
@@ -101,7 +101,7 @@ describe('MenuCategories Component', () => {
   test('Expande e recolhe os accordions corretamente', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
   
@@ -131,7 +131,7 @@ describe('MenuCategories Component', () => {
   test('Abre o Modal ao clicar nos detalhes do accordion', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
 
@@ -150,7 +150,7 @@ describe('MenuCategories Component', () => {
   test('Fecha o Modal ao clicar no botão de fechar', async () => {
     const { getAllByTestId } = render(
       <Provider store={store}>
-        <MenuCategories itemsMenu={MockMenuCategoriesWithModifiers} />
+        <MenuCategories itemsMenu={MockResponse} />
       </Provider>
     );
 

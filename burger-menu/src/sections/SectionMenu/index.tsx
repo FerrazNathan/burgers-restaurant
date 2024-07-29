@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import { MenuCategories } from "../../components/MenuCategories";
-import { ProductsProps, MenuTypes, MenuCategoriesRef } from './Menu.types';
+import { ProductsProps, MenuTypes, MenuCategoriesRef } from '../../interface/Menu.types';
 import { Search } from '@/components/Search';
 import { ShoppingCart } from '@/components/ShoppingCart';
 
