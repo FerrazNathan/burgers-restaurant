@@ -23,7 +23,7 @@ function ManageProducts() {
   const [response, setResponse] = useState<MenuTypes>({ categories: [] })
   const [selectedItem, setSelectedItem] = useState<ProductsProps | CategoryProps | null>(null);
 
-  const hashKey = '-O2Sy_EEcx09kCRzfeAh'
+  const hashKey = '-O2wuwtlN6h_ql_cAQK8'
   const endpoint = `https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/products/${hashKey}.json`
 
   const openModal = (item: CategoryProps | ProductsProps) => {
@@ -49,7 +49,116 @@ function ManageProducts() {
     fetchData();
   }, [])
 
-  console.log('SELECTEDITEM =>', selectedItem)
+
+
+  
+  const handleAddProduct = async () => {
+    setLoading(true);
+    try {
+        const newProduct = {
+            id: Math.random().toString(36).substr(2, 9),
+            name: productName,
+            description,
+            price: parseFloat(price),
+            image: imageProduct
+        };
+
+        // Obtém o menu atual da API
+        const response = await axios.get(endpoint);
+        const currentMenu = response.data;
+
+        // Atualiza a categoria selecionada com o novo produto
+        const updatedCategories = currentMenu.categories.map((category: CategoryProps) => {
+            if (category.id === selectedCategory) {
+                // Verifica se a categoria já tem produtos
+                const updatedProducts = category.products ? [...category.products, newProduct] : [newProduct];
+                return {
+                    ...category,
+                    products: updatedProducts
+                };
+            }
+            return category;
+        });
+
+        // Atualiza o menu com as categorias modificadas
+        const updatedMenu = {
+            ...currentMenu,
+            categories: updatedCategories
+        };
+
+        // Envia o menu atualizado para a API usando PUT
+        await axios.post(endpoint, updatedMenu);
+
+        setResponse(updatedMenu);
+        setShouldUpdate(true);
+        closeModal();
+    } catch (error) {
+        console.error('Erro ao adicionar produto:', error);
+    } finally {
+        setLoading(false);
+    }
+};
+
+  
+  
+  
+  
+  
+  
+
+  const handleEditProduct = async () => {
+    setLoading(true);
+    try {
+      const updatedProduct = {
+        ...selectedItem!,
+        name: productName,
+        description,
+        price: parseFloat(price),
+        image: imageProduct
+      };
+
+      const currentMenu = await getMenu();
+      const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
+        ...category,
+        products: category.products.map(product =>
+          product.id === selectedItem!.id ? updatedProduct : product
+        )
+      }));
+
+      const updatedMenu = { ...currentMenu, categories: updatedCategories };
+      await axios.put(endpoint, updatedMenu);
+
+      setResponse(updatedMenu);
+      setShouldUpdate(true);
+      closeModal();
+    } catch (error) {
+      console.error('Erro ao editar produto:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteProduct = async () => {
+    setLoading(true);
+    try {
+      const currentMenu = await getMenu();
+      const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
+        ...category,
+        products: category.products.filter(product => product.id !== selectedItem!.id)
+      }));
+
+      const updatedMenu = { ...currentMenu, categories: updatedCategories };
+      await axios.put(endpoint, updatedMenu);
+
+      setResponse(updatedMenu);
+      setShouldUpdate(true);
+      closeModal();
+    } catch (error) {
+      console.error('Erro ao deletar produto:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,29 +180,35 @@ function ManageProducts() {
   }, [shouldUpdate, response]);
 
   return (
-    <React.Fragment>
-      <S.ContainerComponent data-testid='ContainerComponent'>
-        <h2>Editar Produtos</h2>
-          <S.ContainerCards>
-            {response && response.categories && response.categories.map((category: CategoryProps) => (category.products && category.products.map((products) => (
-              <S.Card 
-                key={products.id}
-                onClick={() => openModal(products)}
-              >
-                <Image 
-                  src={products.image} 
-                  alt="Imagem do produto" 
-                  width={300} 
-                  height={200}
-                />
-                <h3>{products.name}</h3>
-                {('description' in products) && <p>{products.description}</p>}
-                <p>{formatPrice(products.price)}</p>
-              </S.Card>
-            ))))}
+    <S.ContainerSection data-testid='ContainerSection'>
+      {loading && <Loading description='Carregando ...' />}
+      {!loading && (
+        <S.ContainerComponent data-testid='ContainerComponent'>
+          <h2>Editar Produtos</h2>
+            <S.ContainerCards>
+              {response && 
+              response.categories && 
+              response.categories.map((category: CategoryProps) => (
+                category.products && 
+                category.products.map((products) => (
+                <S.Card 
+                  key={products.id}
+                  onClick={() => openModal(products)}
+                >
+                  <Image 
+                    src={products.image} 
+                    alt="Imagem do produto" 
+                    width={300} 
+                    height={200}
+                  />
+                  <h3>{products.name}</h3>
+                  {('description' in products) && <p>{products.description}</p>}
+                  <p>{formatPrice(products.price)}</p>
+                </S.Card>
+              ))))}
+            </S.ContainerCards>
 
-          </S.ContainerCards>
-          <S.ButtonCreate onClick={() => setBuildNewProduct(true)}>Criar Novo Produto</S.ButtonCreate>
+            <S.ButtonCreate onClick={() => setBuildNewProduct(true)}>Criar Novo Produto</S.ButtonCreate>
             {buildNewProduct && (
               <Modal
               isOpen={buildNewProduct}
@@ -145,13 +260,15 @@ function ManageProducts() {
                   </select>
                 </label>
                 <S.ContainerButtons>
-                  <S.ButtonCreate>Criar Produto</S.ButtonCreate>
+                  <S.ButtonCreate onClick={handleAddProduct}>Criar Produto</S.ButtonCreate>
                 </S.ContainerButtons>
               </S.ContainerModal>
             </Modal>
             
             )}
         </S.ContainerComponent>
+      )}
+      {!loading && (
         <Modal 
           isOpen={isModalOpen} 
           onClose={closeModal}
@@ -164,7 +281,6 @@ function ManageProducts() {
                 width={340}
                 height={200}
               />
-
               {('name' in selectedItem) && (
                 <>
                   <h4>{selectedItem.name}</h4>
@@ -205,15 +321,16 @@ function ManageProducts() {
                     />
                   </label>
                   <S.ContainerButtons>
-                    <S.ButtonAdd>Editar Produto</S.ButtonAdd>
-                    <S.ButtonDelete>Excluir Produto</S.ButtonDelete>
+                    <S.ButtonDelete onClick={handleEditProduct}>Excluir Produto</S.ButtonDelete>
+                    <S.ButtonAdd onClick={handleDeleteProduct}>Editar Produto</S.ButtonAdd>
                   </S.ContainerButtons>
                 </>
               )}
             </S.ContainerModal>
           )}
         </Modal>
-    </React.Fragment>
+      )}
+    </S.ContainerSection>
   )
 }
 

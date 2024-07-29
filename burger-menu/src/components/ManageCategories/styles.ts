@@ -50,12 +50,20 @@ export const Card = styled.span`
   width: 100%;
   max-width: 320px;
   cursor: pointer;
+  overflow: hidden;
   box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
 
   & img {
     border-radius: 0.5rem;
     object-fit: cover;
     object-position: center;
+  }
+
+  & h3 {
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
   }
 `;
 

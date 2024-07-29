@@ -7,15 +7,37 @@ export const ContainerGeneral = styled.div`
   cursor: pointer;
 `
 
+export const ContainerImageCategory = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`
+
 export const ContainerImage = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  width: 100%;
+  flex-wrap: wrap;
 
   & img {
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+  }
+
+  & button {
+    width: 100%;
+    max-width: 100px;
+    position: relative;
+    background: transparent;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    cursor: pointer;
   }
 
   @media(max-width: 768px) {
@@ -40,42 +62,21 @@ export const ContainerCategories = styled.div`
   }
 
   & button {
-    width: 100px;
+    width: 100%;
+    max-width: 100px;
     position: relative;
     background: transparent;
     border: none;
 
     &:hover, &:focus, &:active {
       cursor: pointer;
-
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: -1rem;
-        width: 100px;
-        height: 2px;
-        left: 0;
-        background: #4F372F;
-        transition: width 0.5s ease;
-      }
     }
 
     @media (max-width: 768px) {
-      width: 60px;
+      // width: 60px;
 
       &:hover, &:focus, &:active {
       cursor: pointer;
-
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: -1rem;
-        width: 60px;
-        height: 2px;
-        left: 0;
-        background: #4F372F;
-        transition: width 0.5s ease;
-      }
     }
     }
   }

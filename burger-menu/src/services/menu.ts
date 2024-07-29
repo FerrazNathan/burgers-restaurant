@@ -6,7 +6,7 @@ export const getMenu = async () => {
 
   try {
     const response = await axios.get(endpoint);
-    return response.data['-O2Sy_EEcx09kCRzfeAh'];
+    return response.data['-O2wuwtlN6h_ql_cAQK8'];
   } catch (error) {
     console.error('Error in getMenu');
     throw error;

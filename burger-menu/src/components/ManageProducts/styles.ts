@@ -1,6 +1,18 @@
 import styled, { css } from 'styled-components';
 
-export const ContainerComponent = styled.section`
+export const ContainerSection = styled.section`
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  & svg {
+    position: relative;
+    margin-top: 10%;
+  }
+`
+
+export const ContainerComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,6 +49,7 @@ export const Card = styled.span`
   border-radius: 0.5rem;
   width: 100%;
   max-width: 320px;
+  overflow: hidden;
   cursor: pointer;
   box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
 
@@ -44,6 +57,13 @@ export const Card = styled.span`
     border-radius: 0.5rem;
     object-fit: cover;
     object-position: center;
+  }
+
+  & h3 {
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
   }
 `;
 

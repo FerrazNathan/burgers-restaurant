@@ -17,7 +17,7 @@ function ManageCategories() {
   const [response, setResponse] = useState<MenuTypes>({ categories: [] });
   const [selectedItem, setSelectedItem] = useState<ProductsProps | CategoryProps | null>(null);
 
-  const hashKey = '-O2Sy_EEcx09kCRzfeAh';
+  const hashKey = '-O2wuwtlN6h_ql_cAQK8';
   const endpoint = `https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/products/${hashKey}.json`;
 
   const openModal = (item: CategoryProps | ProductsProps) => {
@@ -169,13 +169,24 @@ function ManageCategories() {
               onClose={closeModal}
             >                        
               <S.ContainerModal>
+                <h3>Criar Categoria</h3>
                 <label>
                   <span>Título da Categoria</span>
-                  <input type="text" onChange={(e) => setCategory(e.target.value)} placeholder='Título da Categoria' />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder='Título da Categoria' 
+                    onChange={(e) => setCategory(e.target.value)} 
+                  />
                 </label>
                 <label>
                   <span>URL da imagem</span>
-                  <input type="text" onChange={(e) => setImageCategory(e.target.value)} placeholder="URL da imagem" />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="URL da imagem" 
+                    onChange={(e) => setImageCategory(e.target.value)} 
+                  />
                 </label>
                 <S.ContainerButtons>
                   <S.ButtonCreate onClick={handleAddCategory}>Criar Categoria</S.ButtonCreate>

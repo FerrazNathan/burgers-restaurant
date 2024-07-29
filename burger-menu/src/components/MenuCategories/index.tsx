@@ -70,29 +70,26 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
       <S.ContainerGeneral>
         <S.ContainerImage>
           {itemsMenu && itemsMenu?.categories.map((item: any, index: number) => (
-            <Image 
-              key={index} 
-              src={item.image} 
-              alt="menu"
-              width={100}
-              height={100}
-              data-testid='menu-categories-image' 
-              onClick={() => handleCategoryClick(index)}
-            />
+            <S.ContainerImageCategory>
+              <Image 
+                key={index} 
+                src={item.image} 
+                alt="menu"
+                width={100}
+                height={100}
+                data-testid='menu-categories-image' 
+                onClick={() => handleCategoryClick(index)}
+              />
+              <button 
+                key={item.category || index}
+                data-testid='menu-categories-button' 
+                onClick={() => handleCategoryClick(index)}
+              >
+                {item.category}
+              </button>
+            </S.ContainerImageCategory>
           ))}
         </S.ContainerImage>
-      
-        <S.ContainerCategories>
-          {itemsMenu && itemsMenu?.categories.map((item: any, index: number) => (
-            <button 
-              key={item.category || index}
-              data-testid='menu-categories-button' 
-              onClick={() => handleCategoryClick(index)}
-            >
-              {item.category}
-            </button>
-          ))}
-        </S.ContainerCategories>
 
         <S.ContainerListMenu>
           {itemsMenu?.categories.map((item: any, index: number) => {
