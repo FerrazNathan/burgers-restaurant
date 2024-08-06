@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     };
     fetchData();
   }, [])
-console.log('response =>', response)
+  
   return (
     <> 
       <Header activePage="Menu" />  

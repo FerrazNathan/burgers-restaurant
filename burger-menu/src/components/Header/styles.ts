@@ -63,11 +63,11 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
       &:after {
         content: '';
         position: absolute;
-        bottom: -15px;
-        width: 232px;
-        height: 5px;
+        bottom: -12px;
+        width: 150px;
+        height: 2px;
         background: #FFF;
-        left: -85px;
+        left: -45px;
         transition: width 0.5s ease;
       }
     }
@@ -76,11 +76,11 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
       &:after {
         content: '';
         position: absolute;
-        bottom: -15px;
-        width: 232px;
-        height: 5px;
+        bottom: -12px;
+        width: 150px;
+        height: 2px;
         background: #FFF;
-        left: -85px;
+        left: -45px;
         transition: width 0.5s ease;
       }
     `}

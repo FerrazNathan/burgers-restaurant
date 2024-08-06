@@ -8,6 +8,7 @@ const nextConfig = {
       'media.istockphoto.com',
       'poaparrilla.com.br',
       'images.unsplash.com',
+      'plus.unsplash.com',
     ],
   },
 }

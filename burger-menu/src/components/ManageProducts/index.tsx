@@ -49,9 +49,6 @@ function ManageProducts() {
     fetchData();
   }, [])
 
-
-
-  
   const handleAddProduct = async () => {
     setLoading(true);
     try {
@@ -87,78 +84,79 @@ function ManageProducts() {
         };
 
         // Envia o menu atualizado para a API usando PUT
-        await axios.post(endpoint, updatedMenu);
+        await axios.put(endpoint, updatedMenu);
 
         setResponse(updatedMenu);
         setShouldUpdate(true);
         closeModal();
     } catch (error) {
-        console.error('Erro ao adicionar produto:', error);
+        console.error('Erro ao adicionar produto:');
     } finally {
         setLoading(false);
     }
-};
-
-  
-  
-  
-  
-  
-  
+  };
 
   const handleEditProduct = async () => {
     setLoading(true);
     try {
-      const updatedProduct = {
-        ...selectedItem!,
-        name: productName,
-        description,
-        price: parseFloat(price),
-        image: imageProduct
-      };
+        // Prepara os dados com apenas os campos alterados
+        const updatedFields = {
+            ...(productName && { name: productName }),
+            ...(description && { description }),
+            ...(price && { price: parseFloat(price) }),
+            ...(imageProduct && { image: imageProduct })
+        };
 
-      const currentMenu = await getMenu();
-      const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
-        ...category,
-        products: category.products.map(product =>
-          product.id === selectedItem!.id ? updatedProduct : product
-        )
-      }));
+        // Obtém o menu atual
+        const currentMenu = await getMenu();
 
-      const updatedMenu = { ...currentMenu, categories: updatedCategories };
-      await axios.put(endpoint, updatedMenu);
+        // Atualiza a categoria com o produto modificado
+        const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
+            ...category,
+            products: category.products.map(product =>
+                product.id === selectedItem!.id ? { ...product, ...updatedFields } : product
+            )
+        }));
 
-      setResponse(updatedMenu);
-      setShouldUpdate(true);
-      closeModal();
+        // Cria o menu atualizado
+        const updatedMenu = { ...currentMenu, categories: updatedCategories };
+
+        // Envia as atualizações para a API usando PATCH
+        await axios.patch(endpoint, updatedMenu);
+
+        setResponse(updatedMenu);
+        setShouldUpdate(true);
+        closeModal();
     } catch (error) {
-      console.error('Erro ao editar produto:', error);
+        console.error('Erro ao editar produto:');
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
+
 
   const handleDeleteProduct = async () => {
     setLoading(true);
     try {
-      const currentMenu = await getMenu();
-      const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
-        ...category,
-        products: category.products.filter(product => product.id !== selectedItem!.id)
-      }));
+        const currentMenu = await getMenu();
+        const updatedCategories = currentMenu.categories.map((category: CategoryProps) => ({
+            ...category,
+            products: category.products.filter(product => product.id !== selectedItem!.id)
+        }));
 
-      const updatedMenu = { ...currentMenu, categories: updatedCategories };
-      await axios.put(endpoint, updatedMenu);
+        const updatedMenu = { ...currentMenu, categories: updatedCategories };
+        await axios.put(endpoint, updatedMenu);
 
-      setResponse(updatedMenu);
-      setShouldUpdate(true);
-      closeModal();
+        setResponse(updatedMenu);
+        setShouldUpdate(true);
+        closeModal();
     } catch (error) {
-      console.error('Erro ao deletar produto:', error);
+        console.error('Erro ao deletar produto:');
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -306,7 +304,7 @@ function ManageProducts() {
                     <span>Preço do Produto</span>
                     <input
                       type="text"
-                      value={price || selectedItem.price.toString()}
+                      value={price || selectedItem.price?.toString()}
                       onChange={(e) => setPrice(e.target.value)}
                       placeholder="Preço do Produto"
                     />
@@ -321,8 +319,8 @@ function ManageProducts() {
                     />
                   </label>
                   <S.ContainerButtons>
-                    <S.ButtonDelete onClick={handleEditProduct}>Excluir Produto</S.ButtonDelete>
-                    <S.ButtonAdd onClick={handleDeleteProduct}>Editar Produto</S.ButtonAdd>
+                    <S.ButtonDelete onClick={handleDeleteProduct}>Excluir Produto</S.ButtonDelete>
+                    <S.ButtonAdd onClick={handleEditProduct}>Editar Produto</S.ButtonAdd> 
                   </S.ContainerButtons>
                 </>
               )}
