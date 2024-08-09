@@ -7,6 +7,7 @@ import { formatPrice } from '../../utils/FormatPrice/formatPrice';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
 import { Loading } from '../Loading';
+import Image from 'next/image';
 
 import * as S from './styles';
 
@@ -43,7 +44,15 @@ const ShoppingCart: React.FC = () => {
         <S.ProductsList>
           {items.map(item => (
             <S.ProductsListItem key={item.id}>
-              <span>{item.name}</span>
+              <S.ContainerImageTitle>
+                <span>{item.name}</span>
+                <Image 
+                  src={item.image} 
+                  alt={item.name} 
+                  width={100}
+                  height={70}
+                />
+              </S.ContainerImageTitle>
               <S.ContainerButtons>
                 <S.ButtonRemove 
                   onClick={() => dispatch(decreaseItemQuantity(item.id))}

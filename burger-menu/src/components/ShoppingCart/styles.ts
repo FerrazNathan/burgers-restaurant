@@ -6,15 +6,22 @@ export const ContainerCart = styled.section`
   flex-direction: column;
   align-items: stretch;
   width: 100%;
-
-  & span {
-    font-size: 1.125rem;
-    font-weight: bold;
-  }
+  max-width: 800px;
+  padding: 1rem;
+  margin: 1.5rem auto;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  margin-bottom: 4.5rem;
+  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
 
   & h2 {
     text-align: center;
     margin: 0 auto;
+  }
+
+  & span {
+    font-size: 1.125rem;
+    font-weight: bold;
   }
 `;
 
@@ -38,6 +45,7 @@ export const ProductsListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  border-bottom: 1px solid #DDD;
 
   & span {
     width: 100%;
@@ -51,6 +59,19 @@ export const ProductsListItem = styled.li`
       text-align: end;
       max-width: 100px;
     }
+  }
+`
+
+export const ContainerImageTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  & img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
   }
 `
 

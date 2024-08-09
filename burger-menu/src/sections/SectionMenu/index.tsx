@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { MenuCategories } from "../../components/MenuCategories";
 import { ProductsProps, MenuTypes, MenuCategoriesRef } from '../../interface/Menu.types';
 import { Search } from '@/components/Search';
-import { ShoppingCart } from '@/components/ShoppingCart';
 
 import * as S from './styles'
 
@@ -35,12 +34,6 @@ function SectionMenu({ itemsMenu }: MenuTypes) {
             itemsMenu={itemsMenu}
           />
         </S.ContainerLeft>
-        
-        {totalQuantity > 0 && (
-          <S.ContainerRight>
-            <ShoppingCart />
-          </S.ContainerRight>
-        )}
       </S.ContainerMenu>
     </S.SectionMenu>
   );

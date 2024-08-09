@@ -45,21 +45,4 @@ export const ContainerLeft = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
-`;
-
-export const ContainerRight = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;

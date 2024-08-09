@@ -9,6 +9,7 @@ export const ContainerHeader = styled.header`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
   background: #4F372F;
 
   @media (max-width: 768px) {
@@ -38,6 +39,12 @@ export const ListMenuHeader = styled.ul`
 
   @media (max-width: 768px) {
     margin: 0.5rem auto;
+  }
+
+  @media (max-width: 480px) {
+    margin: 0.8rem auto;
+    margin-left: -0.5rem;
+    font-size: 1rem;
   }
 `;
 
@@ -103,4 +110,41 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
       `}
     }
   `}
+`
+
+export const ContainerCart = styled.div`
+  position: absolute;
+  top: 0.7rem;
+  right: 2rem;
+  display: flex;
+  cursor: pointer;
+
+  & span {
+    border-radius: 50%;
+    background: #ef0519;
+    padding: 4px;
+    width: 100%;
+    color: #FFF;
+    text-align: center;
+    position: absolute;
+    right: -20px;
+    top: -7px;
+    font-size: 12px;
+    font-weight: 700;
+
+    @media (max-width: 768px) {
+      border-radius: 50%;
+      background: #ef0519;
+      padding: 4px;
+      color: #FFF;
+      text-align: center;
+      position: absolute;
+      right: -20px;
+      top: -7px;
+      font-size: 12px;
+      font-weight: 700;
+      width: 25px !important;
+      height: 25px !important;
+    }
+  }
 `
