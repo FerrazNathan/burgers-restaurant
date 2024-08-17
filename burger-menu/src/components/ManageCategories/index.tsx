@@ -157,6 +157,7 @@ function ManageCategories() {
                   alt="Imagem da categoria do produto"
                   width={300}
                   height={200}
+                  loading="lazy"
                 />
               </S.Card>
             ))}
@@ -209,6 +210,7 @@ function ManageCategories() {
                   alt="menu"
                   width={340}
                   height={200}
+                  loading="lazy"
                 />
                 {('category' in selectedItem) && (
                   <React.Fragment>

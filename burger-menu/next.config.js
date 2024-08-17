@@ -9,6 +9,7 @@ const nextConfig = {
       'poaparrilla.com.br',
       'images.unsplash.com',
       'plus.unsplash.com',
+      'encrypted-tbn0.gstatic.com',
     ],
   },
 }

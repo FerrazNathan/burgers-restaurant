@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface ContainerProps {
+  disabled?: boolean;
+}
+
 export const ContainerCart = styled.section`
   display: flex;
   justify-content: center;
@@ -88,7 +92,7 @@ export const ButtonRemove = styled.button`
   cursor: pointer;
 `
 
-export const ContainerFinally = styled.div`
+export const ContainerFinally = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,7 +106,7 @@ export const ContainerFinally = styled.div`
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
-    cursor: pointer;
+    cursor: ${(props) => props.disabled ? 'not-allowed' : 'pointer'};
 
     &:hover {
       transition: 0.3s;

@@ -18,6 +18,7 @@ const ShoppingCart: React.FC = () => {
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const dispatch = useDispatch();
   const router = useRouter();
+  const disabledClickButton = totalQuantity < 1;
 
   const handleCheckout = () => {
     setCheckoutSuccess(true);
@@ -51,6 +52,7 @@ const ShoppingCart: React.FC = () => {
                   alt={item.name} 
                   width={100}
                   height={70}
+                  loading="lazy"
                 />
               </S.ContainerImageTitle>
               <S.ContainerButtons>
@@ -73,10 +75,10 @@ const ShoppingCart: React.FC = () => {
       )}
 
       {!checkoutSuccess && (
-        <S.ContainerFinally>
+        <S.ContainerFinally disabled={disabledClickButton}>
           <span>Total: {formatPrice(totalPrice)}</span>
-          <button disabled={totalQuantity < 1} onClick={handleCheckout}>
-            Finalizar compra
+          <button disabled={disabledClickButton} onClick={handleCheckout}>
+            Finalizar Compra
           </button>
         </S.ContainerFinally>
       )}

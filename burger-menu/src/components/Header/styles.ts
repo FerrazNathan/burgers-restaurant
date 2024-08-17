@@ -4,6 +4,15 @@ interface IContainerHeaderProps {
   isActive: boolean;
 }
 
+interface ConatainerCartProps {
+  isLoading: boolean;
+  pageCart?: boolean;
+}
+
+interface ILinkMenuHeaderProps {
+  showIconCart?: boolean;
+}
+
 export const ContainerHeader = styled.header`
   display: flex;
   justify-content: center;
@@ -26,26 +35,30 @@ export const ContainerHeader = styled.header`
   }
 `;
 
-export const ListMenuHeader = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
-  padding: 0;
-  margin: 0.75rem auto;
+export const ListMenuHeader = styled.ul<ILinkMenuHeaderProps>`
+  ${({ showIconCart }) => css`
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #FFF;
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0.75rem auto;
 
-  @media (max-width: 768px) {
-    margin: 0.5rem auto;
-  }
+    @media (max-width: 768px) {
+      margin: 0.5rem auto;
+    }
 
-  @media (max-width: 480px) {
-    margin: 0.8rem auto;
-    margin-left: -0.5rem;
-    font-size: 1rem;
-  }
+    ${showIconCart && css`
+      @media (max-width: 400px) {
+        margin: 0.8rem auto;
+        margin-left: 0;
+        font-size: 1rem;
+      }
+    `}    
+  `}
 `;
 
 export const ItemMenuHeader = styled.li`
@@ -112,39 +125,53 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
   `}
 `
 
-export const ContainerCart = styled.div`
-  position: absolute;
-  top: 0.7rem;
-  right: 2rem;
-  display: flex;
-  cursor: pointer;
-
-  & span {
-    border-radius: 50%;
-    background: #ef0519;
-    padding: 4px;
-    width: 100%;
-    color: #FFF;
-    text-align: center;
+export const ContainerCart = styled.div<ConatainerCartProps>`
+  ${({ isLoading, pageCart }) => css`
     position: absolute;
-    right: -20px;
-    top: -7px;
-    font-size: 12px;
-    font-weight: 700;
+    top: 0.7rem;
+    right: 1rem;
+    display: flex;
+    cursor: ${pageCart ? 'not-allowed' : 'pointer'};
 
-    @media (max-width: 768px) {
-      border-radius: 50%;
-      background: #ef0519;
-      padding: 4px;
-      color: #FFF;
-      text-align: center;
-      position: absolute;
-      right: -20px;
-      top: -7px;
-      font-size: 12px;
-      font-weight: 700;
-      width: 25px !important;
-      height: 25px !important;
+    ${!isLoading && css`
+      & span {
+        border-radius: 50%;
+        background: #ef0519;
+        padding: 4px;
+        width: 50%;
+        color: #FFF;
+        text-align: center;
+        position: absolute;
+        right: 0;
+        top: -7px;
+        font-size: 12px;
+        font-weight: 700;
+
+        @media (max-width: 768px) {
+          border-radius: 50%;
+          background: #ef0519;
+          padding: 4px;
+          color: #FFF;
+          text-align: center;
+          position: absolute;
+          right: -5px;
+          top: -7px;
+          font-size: 12px;
+          font-weight: 700;
+          width: 25px !important;
+          height: 25px !important;
+        }
+      }
+    `}
+
+    & svg {
+      width: 50px;
+      height: 30px;
+
+      & circle {
+        stroke: #FFF;
+      }
     }
-  }
+    
+  `}
 `

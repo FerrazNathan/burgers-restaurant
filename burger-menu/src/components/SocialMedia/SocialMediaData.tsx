@@ -5,11 +5,11 @@ export const SocialMediaData = [
     },
     {
         icon: 'Linkedin',
-        url: 'www.linkedin.com/in/nathan-ferraz-022659216'
+        url: 'https://www.linkedin.com/in/nathan-ferraz-022659216'
     },
     {
         icon: 'Facebook',
-        url: 'https://facebook.com'
+        url: 'https://www.facebook.com/nathan.ferraz.58'
     },
     {
         icon: 'Youtube',

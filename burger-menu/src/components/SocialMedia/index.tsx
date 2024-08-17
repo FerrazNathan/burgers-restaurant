@@ -36,7 +36,7 @@ function SocialMedia() {
               <S.SocialMediaLink
                 href={item.url} 
                 target='_blank' 
-                rel='noreferrer'
+                rel="noopener noreferrer"
                 data-testid={`social-media-item-${item.icon}`}
               >
                 {IconComponent && <IconComponent size={iconSize} />}

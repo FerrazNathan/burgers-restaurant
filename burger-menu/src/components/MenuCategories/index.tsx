@@ -77,6 +77,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
                 alt="menu"
                 width={100}
                 height={100}
+                loading="lazy"
                 data-testid='menu-categories-image' 
                 onClick={() => handleCategoryClick(index)}
               />
@@ -134,6 +135,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
                           alt="menu"
                           width={128}
                           height={85}
+                          loading="lazy"
                           data-testid={`image-details-${index}`}
                         />
                       </S.ContainerImageAccordionDetails>
@@ -154,6 +156,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
               alt="menu"
               width={465}
               height={200}
+              loading="lazy"
             />
             <Typography variant="h4" component="h2">
               {selectedItem.name}

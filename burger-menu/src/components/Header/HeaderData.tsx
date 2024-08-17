@@ -8,7 +8,7 @@ export const HeaderData = [
         url: '/signin'
     },
     {
-        page: 'Contato',
+        page: 'Contatos',
         url: '/contact'
     },
 ]

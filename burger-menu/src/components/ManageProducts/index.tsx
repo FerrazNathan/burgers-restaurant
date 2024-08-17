@@ -198,6 +198,7 @@ function ManageProducts() {
                     alt="Imagem do produto" 
                     width={300} 
                     height={200}
+                    loading="lazy"
                   />
                   <h3>{products.name}</h3>
                   {('description' in products) && <p>{products.description}</p>}
@@ -278,6 +279,7 @@ function ManageProducts() {
                 alt="menu"
                 width={340}
                 height={200}
+                loading="lazy"
               />
               {('name' in selectedItem) && (
                 <>

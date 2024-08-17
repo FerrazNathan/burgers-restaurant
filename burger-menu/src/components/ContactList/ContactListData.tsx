@@ -1,26 +1,26 @@
 export const ContactListData = [
     {
         icon: 'Whatsapp',
-        url: 'https://api.whatsapp.com/send?phone=5511949974887'
+        url: 'https://api.whatsapp.com/send?phone=5511978700730'
     },
     {
         icon: 'Telefone',
-        url: 'tel:+55123456789'
+        url: 'tel:+5511978700730'
     },
     {
         icon: 'Email',
-        url: 'mailto:nossocontato@email.com.br'
+        url: 'mailto:naathanferraz@gmail.com.com'
     },
     {
         icon: 'Celular',
-        url: 'tel:+55123456789'
+        url: 'tel:+5511978700730'
     },
     {
         icon: 'Direct',
-        url: 'https://www.instagram.com'
+        url: 'https://www.instagram.com/ferraznaathan/'
     },
     {
         icon: 'Messenger',
-        url: 'https://www.messenger.com'
+        url: 'https://www.facebook.com/nathan.ferraz.58'
     },
 ];

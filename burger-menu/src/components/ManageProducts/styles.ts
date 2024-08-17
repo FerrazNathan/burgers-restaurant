@@ -93,7 +93,7 @@ export const ContainerModal = styled.div`
       text-align: left;
     }
 
-    & input, textarea {
+    & input, textarea, select {
       box-sizing: border-box;
       border: none;
       border-radius: 0.5rem;
