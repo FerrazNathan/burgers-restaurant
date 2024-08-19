@@ -1,4 +1,5 @@
 # Burgers Restaurant
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
 ## Descrição
 
@@ -11,6 +12,7 @@ Esta aplicação é uma solução para o desafio de Front End Developer. Ela exi
 - ES6+
 - React Hooks
 - Redux
+- Jest
 - Styled Components
 - Axios (para requisições HTTP)
 
@@ -20,6 +22,8 @@ Esta aplicação é uma solução para o desafio de Front End Developer. Ela exi
 - Listagem de itens do menu
 - Adição de itens ao carrinho
 - Visualização e ajuste do conteúdo do carrinho
+- Campo de busca de produtos
+- Página de contatos
 
 ## Requisitos
 
@@ -50,12 +54,11 @@ Esta aplicação é uma solução para o desafio de Front End Developer. Ela exi
    ```bash
    http://localhost:3000
 
-5. **Para Melhor experiência do usuário**
-#### É recomendado usar a extensão "Allow CORS: Access-Control-Allow-Origin" disponível na Chrome Web Store, para obter a resposta correta da API.
 
 ## Estrutura do Projeto
 src/components: Contém os componentes reutilizáveis da aplicação
 src/pages: Contém as páginas principais da aplicação
+src/sections: Contém seções de componentes que compõem as páginas principais da aplicação
 src/redux: Configuração do Redux, incluindo slices e store
 src/services: Configuração das chamadas de API
 src/styles: Estilos globais e configuração de temas
@@ -66,13 +69,10 @@ Componentização: Componentes foram criados para serem reutilizáveis e modular
 Gerenciamento de Estado: Redux foi utilizado para gerenciar o estado global da aplicação, garantindo consistência e facilitando o acesso aos dados em diferentes partes da aplicação.
 Testes: Adicionei testes unitários utilizando React Testing Library para garantir a funcionalidade correta dos componentes.
 
+## Dicas de Usabilidade
+Para acessar todas as funcionalidades do sistema, faça login utilizando a conta de administrador. Com essa conta, você poderá gerenciar produtos e ter controle total sobre o sistema.
+Recomendamos que ao fazer os testes como admin, crie novas categorias e produtos, e então edite e exclua como quiser, para que, ao fazer isso não exclua items demais da lista e assim deixe o layout vazio de produtos e categorias.
 
-## Tratamento de Cross-Origin Resource Sharing (CORS)
-### Problema
-Durante o desenvolvimento, você pode encontrar erros relacionados ao CORS (Cross-Origin Resource Sharing), que ocorrem quando uma aplicação tenta carregar recursos de um domínio diferente daquele onde está hospedada.
-
-### Solução
-Para resolver problemas de CORS durante o desenvolvimento local, recomenda-se usar uma extensão no navegador que permita desativar temporariamente as políticas CORS. Isso permite testar a integração com APIs e serviços externos sem ser bloqueado pelo navegador devido a restrições de segurança.
-
-### Recomendação
-Para o Google Chrome, você pode usar a extensão "Allow CORS: Access-Control-Allow-Origin" disponível na Chrome Web Store. Esta extensão permite desabilitar temporariamente as políticas CORS no navegador, facilitando o desenvolvimento e depuração de aplicações que dependem de integrações externas.
+### Credenciais de Acesso
+- E-mail: useradministrator@user.com.br
+- Senha: SenhaDeUserAdmin
