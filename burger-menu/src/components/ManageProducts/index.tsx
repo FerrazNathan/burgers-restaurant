@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
-import InputMask from 'react-input-mask'
 import { getMenu } from '../../services/menu'
 import { Modal } from '../Modal'
 import { Loading } from '../Loading'
@@ -10,7 +9,7 @@ import { MenuTypes, CategoryProps, ProductsProps } from '../../interface/Menu.ty
 
 import * as S from './styles'
 
-function ManageProducts() {
+function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [price, setPrice] = useState('')
   const [loading, setLoading] = useState(false)
   const [productName, setProductName] = useState('')
@@ -51,6 +50,7 @@ function ManageProducts() {
 
   const handleAddProduct = async () => {
     setLoading(true);
+
     try {
         const newProduct = {
             id: Math.random().toString(36).substr(2, 9),
@@ -88,6 +88,7 @@ function ManageProducts() {
 
         setResponse(updatedMenu);
         setShouldUpdate(true);
+        setUpdatePage(true)
         closeModal();
     } catch (error) {
         console.error('Erro ao adicionar produto:');
@@ -126,6 +127,7 @@ function ManageProducts() {
 
         setResponse(updatedMenu);
         setShouldUpdate(true);
+        setUpdatePage(true);
         closeModal();
     } catch (error) {
         console.error('Erro ao editar produto:');
@@ -133,7 +135,6 @@ function ManageProducts() {
         setLoading(false);
     }
   };
-
 
   const handleDeleteProduct = async () => {
     setLoading(true);
@@ -149,6 +150,7 @@ function ManageProducts() {
 
         setResponse(updatedMenu);
         setShouldUpdate(true);
+        setUpdatePage(true);
         closeModal();
     } catch (error) {
         console.error('Erro ao deletar produto:');
@@ -156,7 +158,6 @@ function ManageProducts() {
         setLoading(false);
     }
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -214,53 +215,59 @@ function ManageProducts() {
               onClose={closeModal}
             >
               <S.ContainerModal>
-                <label>
-                  <span>Nome do Produto</span>
-                  <input
-                    type="text"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
-                    placeholder='Nome do Produto'
-                  />
-                </label>
-                <label>
-                  <span>Descrição do Produto</span>
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Descrição do Produto"
-                  />
-                </label>
-                <label>
-                  <span>Preço do Produto</span>
-                  <input
-                    type="text"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    placeholder="Preço do Produto"
-                  />
-                </label>
-                <label>
-                  <span>URL da Imagem do Produto</span>
-                  <input
-                    type="text"
-                    value={imageProduct}
-                    onChange={(e) => setImageProduct(e.target.value)}
-                    placeholder="URL da Imagem do Produto"
-                  />
-                </label>
-                <label>
-                  <span>Categoria</span>
-                  <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-                    <option value="">Selecione uma categoria</option>
-                    {response.categories.map((category: CategoryProps) => (
-                      <option key={category.id} value={category.id}>{category.category}</option>
-                    ))}
-                  </select>
-                </label>
-                <S.ContainerButtons>
-                  <S.ButtonCreate onClick={handleAddProduct}>Criar Produto</S.ButtonCreate>
-                </S.ContainerButtons>
+                <form onSubmit={handleAddProduct}>
+                  <label>
+                    <span>Nome do Produto</span>
+                    <input
+                      type="text"
+                      required
+                      value={productName}
+                      onChange={(e) => setProductName(e.target.value)}
+                      placeholder='Nome do Produto'
+                    />
+                  </label>
+                  <label>
+                    <span>Descrição do Produto</span>
+                    <textarea
+                      value={description}
+                      required
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Descrição do Produto"
+                    />
+                  </label>
+                  <label>
+                    <span>Preço do Produto</span>
+                    <input
+                      type="text"
+                      value={price}
+                      required
+                      onChange={(e) => setPrice(e.target.value)}
+                      placeholder="Preço do Produto"
+                    />
+                  </label>
+                  <label>
+                    <span>URL da Imagem do Produto</span>
+                    <input
+                      type="text"
+                      value={imageProduct}
+                      required
+                      onChange={(e) => setImageProduct(e.target.value)}
+                      placeholder="URL da Imagem do Produto"
+                    />
+                  </label>
+                  <label>
+                    <span>Categoria</span>
+                    <select required value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+                      <option value="">Selecione uma categoria</option>
+                      {response.categories.map((category: CategoryProps) => (
+                        <option key={category.id} value={category.id}>{category.category}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <S.ContainerButtons>
+                    <S.ButtonCreate type='submit'>Criar Produto</S.ButtonCreate>
+                  </S.ContainerButtons>
+                </form>
               </S.ContainerModal>
             </Modal>
             

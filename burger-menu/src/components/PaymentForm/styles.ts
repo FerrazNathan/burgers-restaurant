@@ -28,8 +28,6 @@ export const FormContainer = styled.div`
   padding: 1rem;
   box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
   border-radius: 0.5rem;
-
-
 `;
 
 export const FormField = styled.div`
@@ -69,27 +67,34 @@ export const Input = styled.input`
   padding: 1rem;
   background: transparent;
 
-    &::placeholder {
-      color: #AAA;
-    }
+  &::placeholder {
+    color: #AAA;
+  }
 
-    &:focus, active {
-      outline: none;
-    }
+  &:focus, active {
+    outline: none;
+  }
 `;
 
 export const Button = styled.button`
   width: 100%;
-    padding: 0.8rem;
-    background: #007bff;
-    color: #FFF;
-    border: none;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: background 0.3s;
-    
-    &:hover {
-      background: #0056b3;
-    }
+  padding: 0.8rem;
+  background: #007bff;
+  color: #FFF;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s;
+  
+  &:hover {
+    background: #0056b3;
+  }
+`;
+
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
 `;

@@ -7,7 +7,7 @@ import { Loading } from '../../components/Loading';
 import { MenuTypes, CategoryProps, ProductsProps } from '../../interface/Menu.types';
 import * as S from './styles';
 
-function ManageCategories() {
+function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +63,7 @@ function ManageCategories() {
 
       setResponse(response.data);
       setShouldUpdate(true);
+      setUpdatePage(true);
       closeModal();
     } catch (error) {
       console.error('Erro ao adicionar categoria:');
@@ -91,6 +92,7 @@ function ManageCategories() {
 
       setResponse(response.data);
       setShouldUpdate(true);
+      setUpdatePage(true);
       closeModal();
     } catch (error) {
       console.error('Erro ao editar categoria:');
@@ -113,6 +115,7 @@ function ManageCategories() {
 
       setResponse(response.data);
       setShouldUpdate(true);
+      setUpdatePage(true);
       closeModal();
     } catch (error) {
       console.error('Erro ao deletar categoria:');
@@ -171,27 +174,29 @@ function ManageCategories() {
             >                        
               <S.ContainerModal>
                 <h3>Criar Categoria</h3>
-                <label>
-                  <span>Título da Categoria</span>
-                  <input 
-                    required
-                    type="text" 
-                    placeholder='Título da Categoria' 
-                    onChange={(e) => setCategory(e.target.value)} 
-                  />
-                </label>
-                <label>
-                  <span>URL da imagem</span>
-                  <input 
-                    required
-                    type="text" 
-                    placeholder="URL da imagem" 
-                    onChange={(e) => setImageCategory(e.target.value)} 
-                  />
-                </label>
-                <S.ContainerButtons>
-                  <S.ButtonCreate onClick={handleAddCategory}>Criar Categoria</S.ButtonCreate>
-                </S.ContainerButtons>
+                <form onSubmit={handleAddCategory}>
+                  <label>
+                    <span>Título da Categoria</span>
+                    <input 
+                      required
+                      type="text" 
+                      placeholder='Título da Categoria' 
+                      onChange={(e) => setCategory(e.target.value)} 
+                    />
+                  </label>
+                  <label>
+                    <span>URL da imagem</span>
+                    <input 
+                      required
+                      type="text" 
+                      placeholder="URL da imagem" 
+                      onChange={(e) => setImageCategory(e.target.value)} 
+                    />
+                  </label>
+                  <S.ContainerButtons>
+                    <S.ButtonCreate type="submit">Criar Categoria</S.ButtonCreate>
+                  </S.ContainerButtons>
+                </form>
               </S.ContainerModal>              
             </Modal>
           )}

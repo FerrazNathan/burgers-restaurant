@@ -27,21 +27,21 @@ const ShoppingCart: React.FC = () => {
       dispatch(clearCart());
       setCheckoutSuccess(false);
       router.push('/payment');
-    }, 4000);
+    }, 2000);
   };
 
   const sizeIcon = 20;
   
   return (
     <S.ContainerCart>
-      {!checkoutSuccess && <h2>Carrinho</h2>}
+      {!checkoutSuccess && !disabledClickButton && <h2>Carrinho</h2>}
       {checkoutSuccess && (
         <S.ContainerMessageLoading>
           <h2>Você será redirecionado para a página de pagamentos!</h2>
           <Loading description='Carregando ...' />
         </S.ContainerMessageLoading>
       )}
-      {!checkoutSuccess && (
+      {!checkoutSuccess && !disabledClickButton && (
         <S.ProductsList>
           {items.map(item => (
             <S.ProductsListItem key={item.id}>
@@ -74,11 +74,20 @@ const ShoppingCart: React.FC = () => {
         </S.ProductsList>
       )}
 
-      {!checkoutSuccess && (
+      {!checkoutSuccess && !disabledClickButton && (
         <S.ContainerFinally disabled={disabledClickButton}>
-          <span>Total: {formatPrice(totalPrice)}</span>
+          {!disabledClickButton && <span>Total: {formatPrice(totalPrice)}</span>}
           <button disabled={disabledClickButton} onClick={handleCheckout}>
             Finalizar Compra
+          </button>
+        </S.ContainerFinally>
+      )}
+
+      {disabledClickButton && (
+        <S.ContainerFinally>
+          <span>Seu carrinho está vazio, voltar para a página de Menu?</span>
+          <button onClick={() => router.push('/')}>
+            Voltar
           </button>
         </S.ContainerFinally>
       )}

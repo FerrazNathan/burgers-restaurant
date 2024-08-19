@@ -31,7 +31,8 @@
     "react-select": "^5.8.0",
     "redux-persist": "^6.0.0",
     "styled-components": "^6.1.11",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.3.0",
