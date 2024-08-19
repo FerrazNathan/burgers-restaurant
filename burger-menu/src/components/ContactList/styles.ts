@@ -23,9 +23,9 @@ export const ContactListList = styled.ul`
 
 export const ContactListItem = styled.li`
   list-style: none;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: ${(props) => props.theme.border.radius.sm};
 `;
 
 export const ContactListLink = styled.a`

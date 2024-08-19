@@ -23,8 +23,8 @@ export const SocialMediaList = styled.ul`
 export const SocialMediaItem = styled.li`
   list-style: none;
   padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+  border-radius: ${(props) => props.theme.border.radius.sm};
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
 `;
 
 export const SocialMediaLink = styled.a`

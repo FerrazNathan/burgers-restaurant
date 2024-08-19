@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const rotate = keyframes`
@@ -15,7 +14,7 @@ export const ComponentLoading = styled.div`
   gap: 2rem;
 
   & span {
-    color: #007bff;
+    color: ${(props) => props.theme.colors.status.alert};
     font-weight: 700;
   }
 `

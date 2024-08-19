@@ -26,8 +26,8 @@ export const FormContainer = styled.div`
   max-width: 400px;
   margin: 0 auto;
   padding: 1rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
-  border-radius: 0.5rem;
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
+  border-radius: ${(props) => props.theme.border.radius.sm};
 `;
 
 export const FormField = styled.div`
@@ -37,13 +37,13 @@ export const FormField = styled.div`
     box-sizing: border-box;
     width: 100%;
     border: none;
-    border-radius: 0.5rem;
-    box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+    border-radius: ${(props) => props.theme.border.radius.sm};
+    box-shadow: ${(props) => props.theme.boxShadow.shadow};;
     padding: 1rem;
     background: transparent;
 
     &::placeholder {
-      color: #AAA;
+      color: ${(props) => props.theme.colors.text.medium};
     }
 
     &:focus, active {
@@ -62,13 +62,13 @@ export const Input = styled.input`
   box-sizing: border-box;
   width: 100%;
   border: none;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+  border-radius: ${(props) => props.theme.border.radius.sm};
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
   padding: 1rem;
   background: transparent;
 
   &::placeholder {
-    color: #AAA;
+    color: ${(props) => props.theme.colors.text.medium};
   }
 
   &:focus, active {
@@ -79,22 +79,23 @@ export const Input = styled.input`
 export const Button = styled.button`
   width: 100%;
   padding: 0.8rem;
-  background: #007bff;
-  color: #FFF;
+  background: ${(props) => props.theme.colors.status.alert};
+  color: ${(props) => props.theme.colors.text.light};
   border: none;
-  border-radius: 0.3rem;
+  border-radius: ${(props) => props.theme.border.radius.sm};
   cursor: pointer;
   text-transform: uppercase;
-  transition: background 0.3s;
+  transition: background 0.5s;
   
   &:hover {
-    background: #0056b3;
+    background: ${(props) => props.theme.colors.status.alertHover};
   }
 `;
 
 export const ErrorMessage = styled.span`
-  color: red;
+  color: ${(props) => props.theme.colors.status.error};
   font-size: 12px;
   margin-top: 4px;
   display: block;
+  font-weight: 600;
 `;

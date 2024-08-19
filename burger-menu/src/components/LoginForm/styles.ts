@@ -21,7 +21,7 @@ export const ContainerLoginForm = styled.div`
   text-align: center;
 
   & p {
-    color: #AAA;
+    color: ${(props) => props.theme.colors.text.medium};
   }
 
   @media (max-width: 768px) {
@@ -45,20 +45,20 @@ export const ContainerEmailPassword = styled.label`
 
   & span {
     margin-bottom: 0.3rem;
-    font-weight: bold;
+    font-weight: 600;
     text-align: left;
   }
 
   & input {
     box-sizing: border-box;
     border: none;
-    border-radius: 0.5rem;
-    box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+    border-radius: ${(props) => props.theme.border.radius.sm};
+    box-shadow: ${(props) => props.theme.boxShadow.shadow};
     padding: 1rem;
     background: transparent;
 
     &::placeholder {
-      color: #AAA;
+      color: ${(props) => props.theme.colors.text.medium};;
     }
 
     &:focus, active {
@@ -74,16 +74,16 @@ export const ContainerButtonSubmit = styled.div`
   & button {
     width: 100%;
     padding: 0.8rem;
-    background: #007bff;
-    color: #FFF;
+    background: ${(props) => props.theme.colors.status.alert};
+    color: ${(props) => props.theme.colors.text.light};
     border: none;
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.border.radius.sm};
     cursor: pointer;
     text-transform: uppercase;
     transition: background 0.3s;
     
     &:hover {
-      background: #0056b3;
+      background: ${(props) => props.theme.colors.status.alertHover};
     }
   }
 `
@@ -96,12 +96,12 @@ export const ContainerButtonLogin = styled.div`
     background: none;
     width: 100%;
     border: none;
-    color: #007bff;
+    color: ${(props) => props.theme.colors.status.alert};
     cursor: pointer;
     transition: color 0.3s;
 
     &:hover {
-      color: #0056b3;
+      color: ${(props) => props.theme.colors.status.alertHover};
     }
   }
 `
@@ -113,16 +113,16 @@ export const ContainerButtonLogout = styled.div`
   & button {
     width: 100%;
     padding: 0.8rem;
-    background: #b50211;
-    color: #FFF;
+    background: ${(props) => props.theme.colors.status.error};
+    color: ${(props) => props.theme.colors.text.light};
     border: none;
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.border.radius.sm};
     cursor: pointer;
     text-transform: uppercase;
     transition: background 0.3s;
     
     &:hover {
-      background: #ef0519;
+      background: ${(props) => props.theme.colors.status.errorHover};
     }
   }
 `

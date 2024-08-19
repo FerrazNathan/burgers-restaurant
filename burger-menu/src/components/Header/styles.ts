@@ -19,7 +19,7 @@ export const ContainerHeader = styled.header`
   flex-direction: column;
   align-items: center;
   position: relative;
-  background: #4F372F;
+  background: ${(props) => props.theme.colors.primary.standard};
 
   @media (max-width: 768px) {
     & span {
@@ -42,7 +42,7 @@ export const ListMenuHeader = styled.ul<ILinkMenuHeaderProps>`
     gap: 1rem;
     font-size: 1.25rem;
     font-weight: 400;
-    color: #FFF;
+    color: ${(props) => props.theme.colors.text.light};
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0.75rem auto;
@@ -86,7 +86,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         bottom: -12px;
         width: 150px;
         height: 2px;
-        background: #FFF;
+        background: ${(props) => props.theme.colors.text.light};
         left: -45px;
         transition: width 0.5s ease;
       }
@@ -99,7 +99,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         bottom: -12px;
         width: 150px;
         height: 2px;
-        background: #FFF;
+        background: ${(props) => props.theme.colors.text.light};
         left: -45px;
         transition: width 0.5s ease;
       }
@@ -136,10 +136,10 @@ export const ContainerCart = styled.div<ConatainerCartProps>`
     ${!isLoading && css`
       & span {
         border-radius: 50%;
-        background: #ef0519;
+        background: ${(props) => props.theme.colors.status.error};
         padding: 4px;
         width: 50%;
-        color: #FFF;
+        color: ${(props) => props.theme.colors.text.light};
         text-align: center;
         position: absolute;
         right: 0;
@@ -149,9 +149,9 @@ export const ContainerCart = styled.div<ConatainerCartProps>`
 
         @media (max-width: 768px) {
           border-radius: 50%;
-          background: #ef0519;
+          background: ${(props) => props.theme.colors.status.error};;
           padding: 4px;
-          color: #FFF;
+          color: ${(props) => props.theme.colors.text.light};
           text-align: center;
           position: absolute;
           right: -5px;
@@ -169,7 +169,7 @@ export const ContainerCart = styled.div<ConatainerCartProps>`
       height: 30px;
 
       & circle {
-        stroke: #FFF;
+        stroke: ${(props) => props.theme.colors.text.light};
       }
     }
     

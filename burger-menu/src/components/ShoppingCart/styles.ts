@@ -13,10 +13,10 @@ export const ContainerCart = styled.section`
   max-width: 800px;
   padding: 1rem;
   margin: 1.5rem auto;
-  border-radius: 1.5rem;
+  border-radius: ${(props) => props.theme.border.radius.lg};
   overflow: hidden;
   margin-bottom: 4.5rem;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
 
   & h2 {
     text-align: center;
@@ -49,7 +49,7 @@ export const ProductsListItem = styled.li`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid ${(props) => props.theme.colors.background.medium};
 
   & span {
     width: 100%;
@@ -74,7 +74,7 @@ export const ContainerImageTitle = styled.div`
   & img {
     object-fit: cover;
     object-position: center;
-    border-radius: 1rem;
+    border-radius: ${(props) => props.theme.border.radius.sm};
     margin-bottom: 0.5rem;
   }
 `
@@ -101,16 +101,16 @@ export const ContainerFinally = styled.div<ContainerProps>`
   margin-top: 1rem;
 
   & button {
-    background: #4F372F;
-    color: #fff;
+    background: ${(props) => props.theme.colors.primary.light};
+    color: ${(props) => props.theme.colors.text.light};
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 0.25rem;
+    border-radius: ${(props) => props.theme.border.radius.xs};
     cursor: ${(props) => props.disabled ? 'not-allowed' : 'pointer'};
 
     &:hover {
-      transition: 0.3s;
-      background: #71493c;
+      transition: ease 0.3s;
+      background: ${(props) => props.theme.colors.primary.standard};
     }
   }
 `

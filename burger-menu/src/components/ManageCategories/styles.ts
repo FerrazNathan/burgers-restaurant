@@ -40,21 +40,20 @@ export const ContainerCards = styled.div`
   gap: 1rem;
 `;
 
-
 export const Card = styled.span`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: ${(props) => props.theme.border.radius.sm};
   width: 100%;
   max-width: 320px;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+  box-shadow: ${(props) => props.theme.boxShadow.shadow};
 
   & img {
-    border-radius: 0.5rem;
+    border-radius: ${(props) => props.theme.border.radius.sm};
     object-fit: cover;
     object-position: center;
   }
@@ -96,13 +95,13 @@ export const ContainerModal = styled.div`
     & input, textarea {
       box-sizing: border-box;
       border: none;
-      border-radius: 0.5rem;
-      box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+      border-radius: ${(props) => props.theme.border.radius.sm};
+      box-shadow: ${(props) => props.theme.boxShadow.shadow};;
       padding: 1rem;
       background: transparent;
 
       &::placeholder {
-        color: #AAA;
+        color: ${(props) => props.theme.colors.text.medium};
       }
 
       &:focus, active {
@@ -120,23 +119,23 @@ export const ContainerButtons = styled.div`
 
 export const ButtonBase = () => css`
   padding: 0.8rem;
-  border-radius: 0.3rem;
+  border-radius: ${(props) => props.theme.border.radius.sm};
   width: 100%;
   max-width: 200px;
   border: none;
-  color: #FFF;
+  color: ${(props) => props.theme.colors.text.light};
   cursor: pointer;
   text-transform: uppercase;
-  transition: ease 0.3s;
+  transition: ease 0.5s;
 `
 
 export const ButtonCreate = styled.button`
   ${() => css`
     ${ButtonBase}
-    background: #4F372F;
+    background: ${(props) => props.theme.colors.primary.light};
 
     &:hover {
-      background: #5E4537;
+      background: ${(props) => props.theme.colors.primary.standard};
     }
   `}
 `
@@ -144,10 +143,10 @@ export const ButtonCreate = styled.button`
 export const ButtonAdd = styled.button`
   ${() => css`
     ${ButtonBase}
-    background: #0056b3;
+    background: ${(props) => props.theme.colors.status.alert};
 
     &:hover {
-      background: #007bff;
+      background: ${(props) => props.theme.colors.status.alertHover};
     }
   `}
 `
@@ -155,10 +154,10 @@ export const ButtonAdd = styled.button`
 export const ButtonDelete = styled.button`
   ${() => css`
     ${ButtonBase}
-    background: #b50211;
+    background: ${(props) => props.theme.colors.status.error};
 
     &:hover {
-      background: #ef0519;
+      background: ${(props) => props.theme.colors.status.errorHover};
     }
   `}
 `

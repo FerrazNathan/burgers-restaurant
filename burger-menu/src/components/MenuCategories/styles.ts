@@ -23,7 +23,7 @@ export const ContainerImage = styled.div`
   flex-wrap: wrap;
 
   & img {
-    border-radius: 50%;
+    border-radius: ${(props) => props.theme.border.radius.ul};
     object-fit: cover;
     object-position: center;
   }
@@ -73,11 +73,9 @@ export const ContainerCategories = styled.div`
     }
 
     @media (max-width: 768px) {
-      // width: 60px;
-
       &:hover, &:focus, &:active {
-      cursor: pointer;
-    }
+        cursor: pointer;
+      }
     }
   }
 
@@ -90,8 +88,8 @@ export const ContainerListMenu = styled.div`
   margin-top: 1rem;
 
   & .MuiAccordion-gutters {
-    border-radius: 1rem !important;
-    box-shadow: 1px 1px 5px 2px rgba(29, 29, 29, 0.24);
+    border-radius: ${(props) => props.theme.border.radius.md} !important;
+    box-shadow: ${(props) => props.theme.boxShadow.shadow};
 
     &::before, &::after {
       display: none !important;
@@ -172,17 +170,17 @@ export const ContainerModalQuantity = styled.div`
 `
 
 export const ButtonAddTocart = styled.button`
-  background: #4F372F;
+  background: ${(props) => props.theme.colors.primary.light};
   color: #fff;
   padding: 1rem;
   border: none;
-  border-radius: 1rem;
+  border-radius: ${(props) => props.theme.border.radius.md};
   cursor: pointer;
   transition: background 0.5s ease;
   width: 50%;
   margin: 0 auto;
 
   &:hover {
-    background: #5E4537;
+    background: ${(props) => props.theme.colors.primary.standard};
   }
 `

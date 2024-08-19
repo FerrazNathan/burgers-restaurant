@@ -20,6 +20,7 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
   const [selectedCategory, setSelectedCategory] = useState('')
   const [buildNewProduct, setBuildNewProduct] = useState(false)
   const [response, setResponse] = useState<MenuTypes>({ categories: [] })
+  const [showAllFilteredProducts, setShowAllFilteredProducts] = useState(false)
   const [selectedItem, setSelectedItem] = useState<ProductsProps | CategoryProps | null>(null);
 
   const hashKey = '-O2wuwtlN6h_ql_cAQK8'
@@ -178,6 +179,23 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
     }
   }, [shouldUpdate, response]);
 
+  const filteredProducts: any = []
+
+	response && 
+  response.categories && 
+    response.categories.forEach(category => {
+    category.products &&
+      category.products.forEach(products => {
+        filteredProducts.push({
+				id: products.id,
+        image: products.image,
+				name: products.name,
+				description: products.description,
+				price: products.price
+			})
+		})
+	})
+
   return (
     <S.ContainerSection data-testid='ContainerSection'>
       {loading && <Loading description='Carregando ...' />}
@@ -185,11 +203,7 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
         <S.ContainerComponent data-testid='ContainerComponent'>
           <h2>Editar Produtos</h2>
             <S.ContainerCards>
-              {response && 
-              response.categories && 
-              response.categories.map((category: CategoryProps) => (
-                category.products && 
-                category.products.map((products) => (
+              {filteredProducts.slice(0, showAllFilteredProducts ? filteredProducts.length : 10).map((products: ProductsProps) => (
                 <S.Card 
                   key={products.id}
                   onClick={() => openModal(products)}
@@ -205,8 +219,18 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
                   {('description' in products) && <p>{products.description}</p>}
                   <p>{formatPrice(products.price)}</p>
                 </S.Card>
-              ))))}
+              ))}
             </S.ContainerCards>
+
+            {filteredProducts.length > 10 && (
+              <React.Fragment>
+                {!showAllFilteredProducts ? (
+                  <S.ButtonSeeMore onClick={() => setShowAllFilteredProducts(true)}>Carregar mais produtos</S.ButtonSeeMore>
+                ) : (
+                  <S.ButtonSeeMore onClick={() => setShowAllFilteredProducts(false)}>Mostrar menos produtos</S.ButtonSeeMore>
+                )}
+              </React.Fragment>
+            )}
 
             <S.ButtonCreate onClick={() => setBuildNewProduct(true)}>Criar Novo Produto</S.ButtonCreate>
             {buildNewProduct && (

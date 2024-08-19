@@ -1,27 +1,27 @@
 export const themeLight = {
   colors: {
     primary: {
-      standard: "",
-      medium: "",
-      light: "",
+      standard: "#4F372F",
+      medium: "#5E4537",
+      light: "#71493C",
     },
     text: {
-      standard: "",
-      medium: "",
-      light: "",
+      standard: "1D1D1D",
+      medium: "#AAA",
+      light: "#FFF",
     },
     background: {
-      standard: "",
-      medium: "",
+      standard: "#FFF",
+      medium: "#DDD",
       light: "",
     },
     status: {
-      error: "",
+      error: "#EF0519",
       success: "",
       warning: "",
-      alert: "",
-      errorHover: "",
-      alertHover: "",
+      alert: "#007BFF",
+      errorHover: "#B50211",
+      alertHover: "#0056B3",
     }
   },
   border: {
@@ -32,7 +32,7 @@ export const themeLight = {
       lg: '24px',
       xl: '32px',
       ul: '50%',
-    },
+    },    
   },
   boxShadow: {shadow : '1px 1px 5px 2px rgba(29, 29, 29, 0.24)'}
 }
