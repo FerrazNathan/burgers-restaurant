@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface IContainerHeaderProps {
-  isActive: boolean;
+  activePage: boolean;
 }
 
 interface ConatainerCartProps {
@@ -73,7 +73,7 @@ export const ItemMenuHeader = styled.li`
 `
 
 export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
-  ${({ isActive }) => css`
+  ${({ activePage }) => css`
     width: 232px;
     position: relative;
 
@@ -92,7 +92,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
       }
     }
 
-    ${isActive && css`
+    ${activePage && css`
       &:after {
         content: '';
         position: absolute;
@@ -116,7 +116,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         }
       }
 
-      ${isActive && css`
+      ${activePage && css`
         &:after {
           display: none;
         }

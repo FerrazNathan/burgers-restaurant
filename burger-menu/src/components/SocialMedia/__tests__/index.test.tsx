@@ -1,11 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+
 import { SocialMedia } from '../index';
+import { themes } from '../../../configs/themes';
+import { ThemeProvider } from 'styled-components';
 
 describe('SocialMedia Component', () => {
 
   test('Renderiza o título corretamente', () => {
-    render(<SocialMedia />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <SocialMedia />
+      </ThemeProvider>
+    );
   
     const title = screen.getByTestId('title-section');
   
@@ -13,7 +20,11 @@ describe('SocialMedia Component', () => {
   });
   
   test('Renderiza os ícones corretamente', () => {
-    render(<SocialMedia />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <SocialMedia />
+      </ThemeProvider>
+    );
 
     const instagramIcon = screen.getByTestId('social-media-item-Instagram');
     const linkedinIcon = screen.getByTestId('social-media-item-Linkedin');

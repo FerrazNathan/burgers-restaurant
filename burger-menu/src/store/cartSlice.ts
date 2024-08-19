@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Definição do tipo CartItem
 interface CartItem {
-  id: string; // ID do produto da API
+  id: string;
   name: string;
   description: string;
   image: string;

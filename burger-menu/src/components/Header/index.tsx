@@ -28,7 +28,7 @@ function Header({ activePage }: HeaderProps ) {
           <S.ItemMenuHeader key={index} data-testid='menu-item'>
             <S.LinkMenuHeader 
               href={item.url}
-              isActive={activePage === item.page ? true : false}
+              activePage={activePage === item.page ? true : false}
             >
               {item.page}
             </S.LinkMenuHeader>
@@ -40,10 +40,11 @@ function Header({ activePage }: HeaderProps ) {
         <S.ContainerCart isLoading={loading} pageCart={pageCart}>
           {!loading && (
             <React.Fragment>
-              <span>{totalQuantity}</span>
+              <span data-testid='total-quantity'>{totalQuantity}</span>
               <GiShoppingCart 
                 color='#FFF' 
                 size={24}
+                data-testid='cart-icon'
                 onClick={() => {
                   if(!pageCart) {
                     router.push('/cart')

@@ -2,6 +2,8 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import { Search } from '../index';
 import { getMenu } from '../../../services/menu';
+import { themes } from '../../../configs/themes';
+import { ThemeProvider } from 'styled-components';
 
 jest.mock('../../../services/menu', () => ({
   getMenu: jest.fn().mockResolvedValue({
@@ -19,14 +21,22 @@ jest.mock('../../../services/menu', () => ({
 
 describe('Search Component', () => {
   test('Renderiza o componente Search corretamente', () => {
-    const { getByTestId } = render(<Search onItemSelect={() => {}} />);
+    const { getByTestId } = render(
+      <ThemeProvider theme={themes.light}>
+        <Search onItemSelect={() => {}} />
+      </ThemeProvider>
+    );
     const searchInput = getByTestId('search-component');
 
     expect(searchInput).toBeInTheDocument();
   });
 
   test('Chama loadOptions ao digitar no campo de pesquisa', async () => {
-    const { getByTestId } = render(<Search onItemSelect={() => {}} />);
+    const { getByTestId } = render(
+      <ThemeProvider theme={themes.light}>
+        <Search onItemSelect={() => {}} />
+      </ThemeProvider>
+    );
     const searchInput = getByTestId('search-component').querySelector('input');
 
     fireEvent.change(searchInput!, { target: { value: 'pizza' } });
@@ -41,7 +51,11 @@ describe('Search Component', () => {
 
   test('Chama onItemSelect ao selecionar um item na busca', async () => {
     const mockOnItemSelect = jest.fn();
-    const { getByTestId, getByText } = render(<Search onItemSelect={mockOnItemSelect} />);
+    const { getByTestId, getByText } = render(
+      <ThemeProvider theme={themes.light}>
+        <Search onItemSelect={mockOnItemSelect} />
+      </ThemeProvider>
+    );
   
     const searchInput = getByTestId('search-component').querySelector('input');
     
@@ -64,7 +78,11 @@ describe('Search Component', () => {
 
 describe('Search Component - Error Message', () => {
   test('Exibe mensagem de erro ao digitar menos de 4 caracteres', async () => {
-    const { getByTestId, getByText } = render(<Search onItemSelect={() => {}} />);
+    const { getByTestId, getByText } = render(
+      <ThemeProvider theme={themes.light}>
+        <Search onItemSelect={() => {}} />
+      </ThemeProvider>  
+    );
   
     const searchInput = getByTestId('search-component').querySelector('input');
     fireEvent.change(searchInput!, { target: { value: 'pi' } });
@@ -76,7 +94,11 @@ describe('Search Component - Error Message', () => {
   });
 
   test('Exibe mensagem de erro ao não encontrar resultados', async () => {
-    const { getByTestId, getByText } = render(<Search onItemSelect={() => {}} />);
+    const { getByTestId, getByText } = render(
+      <ThemeProvider theme={themes.light}>
+       <Search onItemSelect={() => {}} />
+      </ThemeProvider>
+    );
 
     const searchInput = getByTestId('search-component').querySelector('input');;
     fireEvent.change(searchInput!, { target: { value: 'xyz' } });

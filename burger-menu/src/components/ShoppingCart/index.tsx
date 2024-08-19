@@ -33,7 +33,7 @@ const ShoppingCart: React.FC = () => {
   const sizeIcon = 20;
   
   return (
-    <S.ContainerCart>
+    <S.ContainerCart data-testid='container-cart'>
       {!checkoutSuccess && !disabledClickButton && <h2>Carrinho</h2>}
       {checkoutSuccess && (
         <S.ContainerMessageLoading>

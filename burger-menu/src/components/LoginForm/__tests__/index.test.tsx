@@ -3,8 +3,11 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import { useRouter } from 'next/router';
+
 import { LoginForm } from '../index';
 import MockAdapter from 'axios-mock-adapter';
+import { themes } from '../../../configs/themes';
+import { ThemeProvider } from 'styled-components';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
@@ -32,7 +35,11 @@ describe('Componente LoginForm', () => {
   });
   
   test('Renderiza corretamante o componente LoginForm', () => {
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
 
     expect(screen.getByPlaceholderText('E-mail de usuário')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Insira a senha')).toBeInTheDocument();
@@ -41,7 +48,11 @@ describe('Componente LoginForm', () => {
   });
 
   test('switches to sign up mode', () => {
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     fireEvent.click(screen.getByRole('button', { name: /Criar uma conta/i }));
 
@@ -64,7 +75,11 @@ describe('Componente LoginForm', () => {
       },
     });
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     fireEvent.change(screen.getByPlaceholderText('E-mail de usuário'), {
       target: { value: 'test@example.com' },
@@ -93,7 +108,11 @@ describe('Componente LoginForm', () => {
       },
     });
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     fireEvent.change(screen.getByPlaceholderText('E-mail de usuário'), {
       target: { value: 'test@example.com' },
@@ -113,7 +132,11 @@ describe('Componente LoginForm', () => {
     mock.onGet('https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/clients.json').reply(200, {});
     mock.onPost('https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/clients.json').reply(200, {});
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     fireEvent.click(screen.getByRole('button', { name: /Criar uma conta/i }));
   
@@ -150,7 +173,11 @@ describe('Componente LoginForm', () => {
   test('shows logged in state', () => {
     sessionStorage.setItem('loggedInUser', JSON.stringify({ email: 'test@example.com' }));
 
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
 
     expect(screen.getByText('Você já está logado no sistema')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Sair/i })).toBeInTheDocument();
@@ -159,7 +186,11 @@ describe('Componente LoginForm', () => {
   test('logout', () => {
     sessionStorage.setItem('loggedInUser', JSON.stringify({ email: 'test@example.com' }));
 
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Sair/i }));
 
@@ -170,7 +201,11 @@ describe('Componente LoginForm', () => {
   test('failed login due to API error', async () => {
     mock.onGet('https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/clients.json').networkError();
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     fireEvent.change(screen.getByPlaceholderText('E-mail de usuário'), {
       target: { value: 'test@example.com' },
@@ -193,7 +228,11 @@ describe('Componente LoginForm', () => {
       '-O2m9h0ltuofIqBIetJD': { email: 'existinguser@example.com', password: 'password123', isAdmin: false, name: 'Existing User' },
     });
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     // Muda para modo de criação de conta
     fireEvent.click(screen.getByRole('button', { name: /Criar uma conta/i }));
@@ -227,7 +266,11 @@ describe('Componente LoginForm', () => {
     // Mock da criação de usuário com sucesso
     mock.onPost('https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/clients.json').reply(200);
   
-    render(<LoginForm />);
+    render(
+      <ThemeProvider theme={themes.light}>
+        <LoginForm />
+      </ThemeProvider>
+    );
   
     // Muda para modo de criação de conta
     fireEvent.click(screen.getByRole('button', { name: /Criar uma conta/i }));

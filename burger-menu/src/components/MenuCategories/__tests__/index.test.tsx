@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import configureMockStore, { MockStoreEnhanced } from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
+
 import { MenuCategories } from '../index';
+import { themes } from '../../../configs/themes';
+import { ThemeProvider } from 'styled-components';
 import { MockResponse } from '../../../__mocks__/mockResponse';
 
 type DispatchExts = ThunkDispatch<{}, undefined, Action>;
@@ -49,9 +52,11 @@ describe('MenuCategories Component', () => {
     const menuItemsImagesProps = MockResponse.categories.map((item) => item.image);
   
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
   
     await waitFor(() => {
@@ -73,9 +78,11 @@ describe('MenuCategories Component', () => {
   
   test('Renderiza corretamente os accordions', async () => {
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
   
     await waitFor(() => {
@@ -86,9 +93,11 @@ describe('MenuCategories Component', () => {
 
   test('Renderiza corretamente os detalhes do accordion', async () => {
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
 
     await waitFor(() => {
@@ -100,9 +109,11 @@ describe('MenuCategories Component', () => {
 
   test('Expande e recolhe os accordions corretamente', async () => {
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
   
     const accordionButtons = getAllByTestId('menu-categories-button');
@@ -127,12 +138,13 @@ describe('MenuCategories Component', () => {
     });
   });
   
-
   test('Abre o Modal ao clicar nos detalhes do accordion', async () => {
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
 
     await waitFor(() => {
@@ -149,9 +161,11 @@ describe('MenuCategories Component', () => {
 
   test('Fecha o Modal ao clicar no botão de fechar', async () => {
     const { getAllByTestId } = render(
-      <Provider store={store}>
-        <MenuCategories itemsMenu={MockResponse} />
-      </Provider>
+      <ThemeProvider theme={themes.light}>
+        <Provider store={store}>
+          <MenuCategories itemsMenu={MockResponse} />
+        </Provider>
+      </ThemeProvider>
     );
 
     await waitFor(() => {

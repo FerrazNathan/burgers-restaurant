@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
+
 import { PaymentForm } from '../index';
 import { useRouter } from 'next/router';
+import { themes } from '../../../configs/themes';
+import { ThemeProvider } from 'styled-components';
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
@@ -9,14 +12,22 @@ jest.mock('next/router', () => ({
 
 describe('PaymentForm Component', () => {
   test('Deve renderizar o formulário de pagamento corretamente', () => {
-    const { getByText } = render(<PaymentForm />);
+    const { getByText } = render(
+      <ThemeProvider theme={themes.light}>
+        <PaymentForm />
+      </ThemeProvider>
+    );
 
     expect(getByText('Formulário de Pagamento')).toBeInTheDocument();
 
   });
 
   test('Deve enviar o formulário e mostrar a mensagem de sucesso do pagamento', async () => {
-    const { getByText } = render(<PaymentForm />);
+    const { getByText } = render(
+      <ThemeProvider theme={themes.light}>
+        <PaymentForm />
+      </ThemeProvider>
+    );
  
     const payButton = getByText('Pagar');
 
@@ -33,7 +44,11 @@ describe('PaymentForm Component', () => {
       push: mockPush,
     }));
 
-    const { getByText } = render(<PaymentForm />);
+    const { getByText } = render(
+      <ThemeProvider theme={themes.light}>
+        <PaymentForm />
+      </ThemeProvider>
+    );
     const payButton = getByText('Pagar');
     fireEvent.click(payButton);
 
