@@ -7,15 +7,17 @@ const rotate = keyframes`
 `;
 
 export const ComponentLoading = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  &.with-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 
-  & span {
-    color: ${(props) => props.theme.colors.status.alert};
-    font-weight: 700;
+    & span {
+      color: ${(props) => props.theme.colors.status.alert};
+      font-weight: 700;
+    }
   }
 `
 

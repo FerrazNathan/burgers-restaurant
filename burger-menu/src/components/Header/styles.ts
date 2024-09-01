@@ -21,15 +21,8 @@ export const ContainerHeader = styled.header`
   position: relative;
   background: ${(props) => props.theme.colors.primary.standard};
 
-  @media (max-width: 768px) {
-    & span {
-      height: 100px !important;
-    }
-  }
-
   & img {
     width: 100%;
-    max-width: 1440px;
     object-fit: cover;
     object-position: center;  
   }
@@ -38,25 +31,26 @@ export const ContainerHeader = styled.header`
 export const ListMenuHeader = styled.ul<ILinkMenuHeaderProps>`
   ${({ showIconCart }) => css`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 1rem;
     font-size: 1.25rem;
     font-weight: 400;
     color: ${(props) => props.theme.colors.text.light};
     font-family: 'Roboto', sans-serif;
-    padding: 0;
-    margin: 0.75rem auto;
+    align-items: center;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0;
+    padding: 0.7rem 1rem;
 
-    @media (max-width: 768px) {
-      margin: 0.5rem auto;
+    @media (max-width: 480px) {
+      font-size: 1rem;
     }
 
     ${showIconCart && css`
       @media (max-width: 400px) {
-        margin: 0.8rem auto;
-        margin-left: 0;
+        margin: 0;
         font-size: 1rem;
-      }
     `}    
   `}
 `;
@@ -127,10 +121,8 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
 
 export const ContainerCart = styled.div<ConatainerCartProps>`
   ${({ isLoading, pageCart }) => css`
-    position: absolute;
-    top: 0.7rem;
-    right: 1rem;
     display: flex;
+    position: relative;
     cursor: ${pageCart ? 'not-allowed' : 'pointer'};
 
     ${!isLoading && css`

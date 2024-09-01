@@ -34,9 +34,8 @@ function Header({ activePage }: HeaderProps ) {
             </S.LinkMenuHeader>
           </S.ItemMenuHeader>
         ))}
-      </S.ListMenuHeader>
-
-      {showIconCart && (
+        
+        {showIconCart && (
         <S.ContainerCart isLoading={loading} pageCart={pageCart}>
           {!loading && (
             <React.Fragment>
@@ -58,7 +57,8 @@ function Header({ activePage }: HeaderProps ) {
           {loading && <Loading />}
         </S.ContainerCart>
       )} 
-      
+      </S.ListMenuHeader>
+
       <Image 
         src={ImageHeader} 
         alt="Imagem do logotipo do restaurante" 

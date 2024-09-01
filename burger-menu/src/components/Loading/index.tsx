@@ -8,7 +8,10 @@ interface LoadingProps {
 
 const Loading: React.FC<LoadingProps> = ({ description }) => {
   return (
-    <S.ComponentLoading data-testid='componente-loading'>
+    <S.ComponentLoading 
+      data-testid='componente-loading'
+      className={description ? 'with-description' : ''}
+    >
       <S.Loader
         className="spinner"
         viewBox="0 0 66 66"

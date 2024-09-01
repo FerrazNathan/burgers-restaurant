@@ -20,7 +20,13 @@ export const ContainerImage = styled.div`
   align-items: center;
   gap: 2rem;
   width: 100%;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   & img {
     border-radius: ${(props) => props.theme.border.radius.ul};
@@ -41,12 +47,16 @@ export const ContainerImage = styled.div`
   }
 
   @media(max-width: 768px) {
-    justify-content: center;
+    gap: 1rem;
 
     & img {
       width: 60px;
       height: 60px;
     }
+  }
+
+  @media(max-width: 480px) {
+    gap: 0.5rem;
   }
 `
 
