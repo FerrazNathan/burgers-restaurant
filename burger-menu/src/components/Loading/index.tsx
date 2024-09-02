@@ -30,7 +30,6 @@ const Loading: React.FC<LoadingProps> = ({ description }) => {
           cx="33"
           cy="33"
           r="30"
-          stroke="#007bff"
         />
       </S.Loader>
       <span>{description}</span>

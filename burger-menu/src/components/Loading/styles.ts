@@ -40,4 +40,5 @@ export const Loader = styled.svg`
 
 export const Circle = styled.circle`
   stroke-width: 4px;
+  stroke: ${(props) => props.theme.colors.status.alert};
 `;

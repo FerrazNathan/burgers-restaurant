@@ -49,7 +49,7 @@ const Search: React.FC<SearchProps> = ({ optionsMessage = '', onItemSelect }) =>
           setLoading(false);
         }
       } else {
-        setErrorMessage('Digite pelo menos 4 caracteres');
+        setErrorMessage('Nenhum resultado encontrado');
         callback([]);
       }
     }, 500),

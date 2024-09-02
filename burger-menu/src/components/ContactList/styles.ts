@@ -6,6 +6,7 @@ export const ContainerContactList = styled.section`
   & h2 {
     text-align:center;
     margin: 0 0 1rem 0;
+    color: ${(props) => props.theme.colors.text.standard};
   }
 
   @media (max-width: 768px){
@@ -38,5 +39,13 @@ export const ContactListLink = styled.a`
 
   & p {
     margin: 0;
+    color: ${(props) => props.theme.colors.base.standard};
   }  
+
+  & svg {
+    & path {
+      fill: ${(props) => props.theme.colors.base.standard};
+      stroke: ${(props) => props.theme.colors.base.standard};
+    }
+  }
 `

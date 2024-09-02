@@ -5,6 +5,7 @@ export const ContainerSection = styled.section`
   width: 100%;
   height: 100%;
   position: relative;
+  color: ${(props) => props.theme.colors.text.standard};
 
   & svg {
     position: relative;
@@ -19,6 +20,7 @@ export const ContainerLoginForm = styled.div`
   justify-content: center;
   padding: 1rem;
   text-align: center;
+  color: ${(props) => props.theme.colors.text.standard};
 
   & p {
     color: ${(props) => props.theme.colors.text.medium};
@@ -56,6 +58,7 @@ export const ContainerEmailPassword = styled.label`
     box-shadow: ${(props) => props.theme.boxShadow.shadow};
     padding: 1rem;
     background: transparent;
+    color: ${(props) => props.theme.colors.text.standard};
 
     &::placeholder {
       color: ${(props) => props.theme.colors.text.medium};;

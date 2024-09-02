@@ -13,7 +13,7 @@ export const themeLight = {
     background: {
       standard: "#FFF",
       medium: "#DDD",
-      light: "",
+      light: "#FCFCFC",
     },
     status: {
       error: "#EF0519",
@@ -22,6 +22,10 @@ export const themeLight = {
       alert: "#007BFF",
       errorHover: "#B50211",
       alertHover: "#0056B3",
+    },
+    base: {
+      standard: "",
+      light: "",
     }
   },
   border: {

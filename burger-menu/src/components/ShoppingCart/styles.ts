@@ -17,6 +17,7 @@ export const ContainerCart = styled.section`
   overflow: hidden;
   margin-bottom: 4.5rem;
   box-shadow: ${(props) => props.theme.boxShadow.shadow};
+  color: ${(props) => props.theme.colors.text.standard};
 
   & h2 {
     text-align: center;

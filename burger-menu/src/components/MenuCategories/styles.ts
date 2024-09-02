@@ -13,6 +13,10 @@ export const ContainerImageCategory = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  & button {
+    color: ${(props) => props.theme.colors.base.standard};
+  }
 `
 
 export const ContainerImage = styled.div`
@@ -97,6 +101,10 @@ export const ContainerListMenu = styled.div`
   gap: 1rem;
   margin-top: 1rem;
 
+  & p {
+    color: ${(props) => props.theme.colors.text.standard};
+  }
+
   & .MuiAccordion-gutters {
     border-radius: ${(props) => props.theme.border.radius.md} !important;
     box-shadow: ${(props) => props.theme.boxShadow.shadow};
@@ -104,6 +112,21 @@ export const ContainerListMenu = styled.div`
     &::before, &::after {
       display: none !important;
     }
+  }
+
+  & .MuiAccordionSummary-root {
+    background: ${(props) => props.theme.colors.background.standard};
+    border-radius: ${(props) => props.theme.border.radius.md};
+    box-shadow: ${(props) => props.theme.boxShadow.shadow};
+  }
+
+  & .MuiSvgIcon-root {
+    color: ${(props) => props.theme.colors.base.standard};
+  }
+
+  & .MuiCollapse-root {
+    background: ${(props) => props.theme.colors.background.standard};
+    border-radius: ${(props) => props.theme.border.radius.md};
   }
 `
 
@@ -149,7 +172,8 @@ export const ContainerModal = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  
+  color: ${(props) => props.theme.colors.text.standard};
+
   & h6 {
     text-align: center;
   }
@@ -181,7 +205,7 @@ export const ContainerModalQuantity = styled.div`
 
 export const ButtonAddTocart = styled.button`
   background: ${(props) => props.theme.colors.primary.light};
-  color: #fff;
+  color: ${(props) => props.theme.colors.text.light};
   padding: 1rem;
   border: none;
   border-radius: ${(props) => props.theme.border.radius.md};

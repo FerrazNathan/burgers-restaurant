@@ -4,6 +4,7 @@ export const PaymentFormContainer = styled.section`
   max-width: 800px;
   margin: 1rem auto;
   padding: 1rem;
+  color: ${(props) => props.theme.colors.text.standard};
 
   @media (max-width: 768px) {
     margin-bottom: 5rem;
@@ -28,6 +29,10 @@ export const FormContainer = styled.div`
   padding: 1rem;
   box-shadow: ${(props) => props.theme.boxShadow.shadow};
   border-radius: ${(props) => props.theme.border.radius.sm};
+
+  & .input-mask {
+    color: ${(props) => props.theme.colors.text.standard};
+  }
 `;
 
 export const FormField = styled.div`
@@ -66,6 +71,7 @@ export const Input = styled.input`
   box-shadow: ${(props) => props.theme.boxShadow.shadow};
   padding: 1rem;
   background: transparent;
+  color: ${(props) => props.theme.colors.base.standard} !important;
 
   &::placeholder {
     color: ${(props) => props.theme.colors.text.medium};

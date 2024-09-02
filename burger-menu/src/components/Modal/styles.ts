@@ -35,4 +35,5 @@ export const CloseButton = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 2;
+  color: ${(props) => props.theme.colors.base.standard};
 `;
