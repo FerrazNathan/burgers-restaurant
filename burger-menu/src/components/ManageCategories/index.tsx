@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useTheme } from '../../hooks/useTheme';
 import { getMenu } from '../../services/menu';
 import { Modal } from '../../components/Modal';
 import { Loading } from '../../components/Loading';
@@ -8,6 +9,7 @@ import { MenuTypes, CategoryProps, ProductsProps } from '../../interface/Menu.ty
 import * as S from './styles';
 
 function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const { theme } = useTheme();
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +19,7 @@ function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<Rea
   const [response, setResponse] = useState<MenuTypes>({ categories: [] });
   const [selectedItem, setSelectedItem] = useState<ProductsProps | CategoryProps | null>(null);
 
+  const themeContrast = theme === 'contrast'
   const hashKey = '-O2wuwtlN6h_ql_cAQK8';
   const endpoint = `https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/products/${hashKey}.json`;
 
@@ -166,13 +169,18 @@ function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<Rea
             ))}
           </S.ContainerCards>
 
-          <S.ButtonCreate onClick={() => setBuildNewCategory(true)}>Criar Nova Categoria</S.ButtonCreate>
+          <S.ButtonCreate 
+            contrast={themeContrast}
+            onClick={() => setBuildNewCategory(true)}
+          >
+            Criar Nova Categoria
+          </S.ButtonCreate>
           {buildNewCategory && (
             <Modal
               isOpen={buildNewCategory}
               onClose={closeModal}
             >                        
-              <S.ContainerModal>
+              <S.ContainerModal contrast={themeContrast}>
                 <h3>Criar Categoria</h3>
                 <form onSubmit={handleAddCategory}>
                   <label>
@@ -194,7 +202,12 @@ function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<Rea
                     />
                   </label>
                   <S.ContainerButtons>
-                    <S.ButtonCreate type="submit">Criar Categoria</S.ButtonCreate>
+                    <S.ButtonCreate 
+                      type="submit"
+                      contrast={themeContrast}
+                    >
+                      Criar Categoria
+                    </S.ButtonCreate>
                   </S.ContainerButtons>
                 </form>
               </S.ContainerModal>              
@@ -209,7 +222,7 @@ function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<Rea
         >
           {selectedItem && (
             <React.Fragment>              
-              <S.ContainerModal>
+              <S.ContainerModal contrast={themeContrast}>
                 <Image
                   src={selectedItem && selectedItem?.image && selectedItem?.image}
                   alt="menu"
@@ -240,8 +253,18 @@ function ManageCategories({ setUpdatePage }: { setUpdatePage: React.Dispatch<Rea
                       />
                     </label>
                     <S.ContainerButtons>
-                      <S.ButtonDelete onClick={handleDeleteCategory}>Excluir Categoria</S.ButtonDelete>
-                      <S.ButtonAdd onClick={handleEditCategory}>Editar Categoria</S.ButtonAdd>
+                      <S.ButtonDelete 
+                        contrast={themeContrast}
+                        onClick={handleDeleteCategory}
+                      >
+                        Excluir Categoria
+                      </S.ButtonDelete>
+                      <S.ButtonAdd 
+                        contrast={themeContrast}
+                        onClick={handleEditCategory}
+                      >
+                        Editar Categoria
+                      </S.ButtonAdd>
                     </S.ContainerButtons>
                   </React.Fragment>
                 )}

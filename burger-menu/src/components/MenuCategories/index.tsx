@@ -1,18 +1,19 @@
 import React, { useState, useImperativeHandle, forwardRef, useEffect, Ref } from 'react';
 import Image from 'next/image';
+import { Modal } from '../Modal';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { Modal } from '../Modal';
+import { useTheme } from '../../hooks/useTheme';
 import { addItem } from '../../store/cartSlice';
 import Accordion from '@mui/material/Accordion';
+import { GrSubtractCircle } from "react-icons/gr";
 import Typography from '@mui/material/Typography';
+import { MdAddCircleOutline } from "react-icons/md";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import { MenuTypes, ProductsProps, MenuCategoriesRef } from '../../interface/Menu.types';
-import { MdAddCircleOutline } from "react-icons/md";
-import { GrSubtractCircle } from "react-icons/gr";
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';
+import { MenuTypes, ProductsProps, MenuCategoriesRef } from '../../interface/Menu.types';
 
 import * as S from './styles';
 
@@ -23,7 +24,11 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const { theme } = useTheme();
   const router = useRouter();
+  const sizeIcon = 32;
+  const themeContrast = theme === 'contrast'
+
   const openModal = (item: ProductsProps) => {
     setSelectedItem(item);
     setIsModalOpen(true);
@@ -62,8 +67,6 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
   useImperativeHandle(ref, () => ({
     openModal,
   }), [openModal]);
-
-  const sizeIcon = 32;
 
   return (
     <React.Fragment>
@@ -175,21 +178,32 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
                     onClick={() => setQuantity(quantity - 1)}
                     disabled={quantity <= 0}
                   >
-                    <GrSubtractCircle size={sizeIcon} color='red' />
+                    <GrSubtractCircle 
+                      size={sizeIcon} 
+                      color={themeContrast ? '#F5FF00' : '#EF0519'} 
+                    />
                   </button>
                   <span>{quantity}</span>
                   <button 
                     onClick={() => setQuantity(quantity + 1)}
                   >
-                    <MdAddCircleOutline size={sizeIcon} color='green' />
+                    <MdAddCircleOutline 
+                      size={sizeIcon} 
+                      color={themeContrast ? '#F5FF00' : '#02F102'} 
+                    />
                   </button>
                 </S.ContainerModalQuantity>
-                <S.ButtonAddTocart onClick={handleAddToCart}>Adicionar ao Carrinho</S.ButtonAddTocart>
+                <S.ButtonAddTocart 
+                  contrast={themeContrast} 
+                  onClick={handleAddToCart}
+                >
+                  Adicionar ao Carrinho
+                </S.ButtonAddTocart>
               </>
             ) : (
               <>
                 <Typography variant="h6" color="error">Você precisa estar logado para adicionar itens ao carrinho.</Typography>
-                <S.ButtonAddTocart onClick={() => router.push('/signin')}>Ir para Login</S.ButtonAddTocart>
+                <S.ButtonAddTocart contrast={themeContrast}  onClick={() => router.push('/signin')}>Ir para Login</S.ButtonAddTocart>
               </>
             )}
           </S.ContainerModal>

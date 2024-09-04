@@ -19,7 +19,7 @@ export const themeDark = {
     },
     status: {
       error: "#F7747D",
-      success: "",
+      success: "#38A538",
       warning: "",
       alert: "#83D4FA",
       errorHover: "#EF646e",

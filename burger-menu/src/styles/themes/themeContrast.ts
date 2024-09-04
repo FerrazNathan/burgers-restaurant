@@ -37,5 +37,5 @@ export const themeContrast = {
       ul: '50%',
     },    
   },
-  boxShadow: {shadow : '1px 1px 5px 2px #FAFAFA'}
+  boxShadow: {shadow : '1px 1px 5px 2px #F5FF00'}
 }

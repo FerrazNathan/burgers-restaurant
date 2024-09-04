@@ -2,11 +2,13 @@ import styled, { css } from 'styled-components';
 
 interface IContainerHeaderProps {
   activePage: boolean;
+  contrast?: boolean;
 }
 
 interface ConatainerCartProps {
   isLoading: boolean;
   pageCart?: boolean;
+  contrast?: boolean;
 }
 
 interface ILinkMenuHeaderProps {
@@ -67,9 +69,10 @@ export const ItemMenuHeader = styled.li`
 `
 
 export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
-  ${({ activePage }) => css`
+  ${({ activePage, contrast }) => css`
     width: 232px;
     position: relative;
+    color: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.text.light};
 
     &:hover, &:focus, &:active {
       cursor: pointer;
@@ -80,7 +83,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         bottom: -12px;
         width: 150px;
         height: 2px;
-        background: ${(props) => props.theme.colors.text.light};
+        background: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.text.light};
         left: -45px;
         transition: width 0.5s ease;
       }
@@ -93,7 +96,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
         bottom: -12px;
         width: 150px;
         height: 2px;
-        background: ${(props) => props.theme.colors.text.light};
+        background: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.text.light};
         left: -45px;
         transition: width 0.5s ease;
       }
@@ -120,7 +123,7 @@ export const LinkMenuHeader = styled.a<IContainerHeaderProps>`
 `
 
 export const ContainerCart = styled.div<ConatainerCartProps>`
-  ${({ isLoading, pageCart }) => css`
+  ${({ isLoading, pageCart, contrast }) => css`
     display: flex;
     position: relative;
     cursor: ${pageCart ? 'not-allowed' : 'pointer'};
@@ -131,7 +134,7 @@ export const ContainerCart = styled.div<ConatainerCartProps>`
         background: ${(props) => props.theme.colors.status.error};
         padding: 4px;
         width: 50%;
-        color: ${(props) => props.theme.colors.text.light};
+        color: ${(props) => contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
         text-align: center;
         position: absolute;
         right: 0;
@@ -143,7 +146,7 @@ export const ContainerCart = styled.div<ConatainerCartProps>`
           border-radius: 50%;
           background: ${(props) => props.theme.colors.status.error};;
           padding: 4px;
-          color: ${(props) => props.theme.colors.text.light};
+          color: ${(props) => contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
           text-align: center;
           position: absolute;
           right: -5px;

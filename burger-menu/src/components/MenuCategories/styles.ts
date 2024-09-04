@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ThemeButtonProps {
+  contrast: boolean;
+}
+
 export const ContainerGeneral = styled.div`
   display: flex;
   flex-direction: column;
@@ -168,7 +172,7 @@ export const ContainerImageAccordionDetails = styled.figure`
   }
 `
 
-export const ContainerModal = styled.div`
+export const ContainerModal = styled.div<ThemeButtonProps>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -203,9 +207,10 @@ export const ContainerModalQuantity = styled.div`
   }
 `
 
-export const ButtonAddTocart = styled.button`
-  background: ${(props) => props.theme.colors.primary.light};
-  color: ${(props) => props.theme.colors.text.light};
+export const ButtonAddTocart = styled.button<ThemeButtonProps>`
+  background: ${(props) => props.contrast ? props.theme.colors.base.standard : props.theme.colors.primary.light};
+  color: ${(props) => props.contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+  font-weight: 600;
   padding: 1rem;
   border: none;
   border-radius: ${(props) => props.theme.border.radius.md};
@@ -215,6 +220,6 @@ export const ButtonAddTocart = styled.button`
   margin: 0 auto;
 
   &:hover {
-    background: ${(props) => props.theme.colors.primary.standard};
+    background: ${(props) => props.contrast ? props.theme.colors.status.alertHover : props.theme.colors.primary.standard};
   }
 `

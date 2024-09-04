@@ -6,6 +6,7 @@ import { increaseItemQuantity, decreaseItemQuantity, clearCart } from '../../sto
 import { formatPrice } from '../../utils/FormatPrice/formatPrice';
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
+import { useTheme } from '../../hooks/useTheme';
 import { Loading } from '../Loading';
 import Image from 'next/image';
 
@@ -18,7 +19,10 @@ const ShoppingCart: React.FC = () => {
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   const dispatch = useDispatch();
   const router = useRouter();
+  const { theme } = useTheme();
   const disabledClickButton = totalQuantity < 1;
+
+  const themeContrast = theme === 'contrast'
 
   const handleCheckout = () => {
     setCheckoutSuccess(true);
@@ -59,13 +63,19 @@ const ShoppingCart: React.FC = () => {
                 <S.ButtonRemove 
                   onClick={() => dispatch(decreaseItemQuantity(item.id))}
                 >
-                  <GrSubtractCircle size={sizeIcon} color='red' />
+                  <GrSubtractCircle 
+                    size={sizeIcon} 
+                    color={themeContrast ? '#F5FF00' : '#EF0519'}
+                  />
                 </S.ButtonRemove>
                 <span>{item.quantity}</span>
                 <S.ButtonRemove 
                   onClick={() => dispatch(increaseItemQuantity(item.id))}
                 >
-                  <MdAddCircleOutline size={sizeIcon} color='green' />
+                  <MdAddCircleOutline 
+                    size={sizeIcon} 
+                    color={themeContrast ? '#F5FF00' : '#02F102'} 
+                  />
                 </S.ButtonRemove>
               </S.ContainerButtons>
               <span>{formatPrice(item.price)}</span>
@@ -75,7 +85,10 @@ const ShoppingCart: React.FC = () => {
       )}
 
       {!checkoutSuccess && !disabledClickButton && (
-        <S.ContainerFinally disabled={disabledClickButton}>
+        <S.ContainerFinally 
+          disabled={disabledClickButton} 
+          contrast={themeContrast}
+        >
           {!disabledClickButton && <span>Total: {formatPrice(totalPrice)}</span>}
           <button disabled={disabledClickButton} onClick={handleCheckout}>
             Finalizar Compra
@@ -84,7 +97,7 @@ const ShoppingCart: React.FC = () => {
       )}
 
       {disabledClickButton && (
-        <S.ContainerFinally>
+        <S.ContainerFinally contrast={themeContrast}>
           <span>Seu carrinho está vazio, voltar para a página de Menu?</span>
           <button onClick={() => router.push('/')}>
             Voltar

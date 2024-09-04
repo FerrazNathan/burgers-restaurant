@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ContainerProps {
   disabled?: boolean;
+  contrast?: boolean;
 }
 
 export const ContainerCart = styled.section`
@@ -102,8 +103,9 @@ export const ContainerFinally = styled.div<ContainerProps>`
   margin-top: 1rem;
 
   & button {
-    background: ${(props) => props.theme.colors.primary.light};
-    color: ${(props) => props.theme.colors.text.light};
+    background: ${(props) => props.contrast ? props.theme.colors.base.standard : props.theme.colors.primary.light};
+    color: ${(props) => props.contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+    font-weight: 600;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: ${(props) => props.theme.border.radius.xs};
@@ -111,7 +113,7 @@ export const ContainerFinally = styled.div<ContainerProps>`
 
     &:hover {
       transition: ease 0.3s;
-      background: ${(props) => props.theme.colors.primary.standard};
+      background: ${(props) => props.contrast ? props.theme.colors.status.alertHover : props.theme.colors.primary.standard};
     }
   }
 `

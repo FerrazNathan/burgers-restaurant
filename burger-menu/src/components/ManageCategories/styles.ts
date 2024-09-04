@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface ThemeContrastProps {
+  contrast: boolean;
+}
+
 export const ContainerSection = styled.section`
   margin: 0 auto;
   width: 100%;
@@ -67,7 +71,7 @@ export const Card = styled.span`
   }
 `;
 
-export const ContainerModal = styled.div`
+export const ContainerModal = styled.div<ThemeContrastProps>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -96,6 +100,7 @@ export const ContainerModal = styled.div`
     & input, textarea {
       box-sizing: border-box;
       border: none;
+      color: ${(props) => props.theme.colors.text.standard};
       border-radius: ${(props) => props.theme.border.radius.sm};
       box-shadow: ${(props) => props.theme.boxShadow.shadow};;
       padding: 1rem;
@@ -122,43 +127,46 @@ export const ButtonBase = () => css`
   padding: 0.8rem;
   border-radius: ${(props) => props.theme.border.radius.sm};
   width: 100%;
+  font-weight: 600;
   max-width: 200px;
   border: none;
-  color: ${(props) => props.theme.colors.text.light};
   cursor: pointer;
   text-transform: uppercase;
   transition: ease 0.5s;
 `
 
-export const ButtonCreate = styled.button`
-  ${() => css`
+export const ButtonCreate = styled.button<ThemeContrastProps>`
+  ${({ contrast }) => css`
     ${ButtonBase}
-    background: ${(props) => props.theme.colors.primary.light};
+    color: ${(props) => contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+    background: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.primary.light};
 
     &:hover {
-      background: ${(props) => props.theme.colors.primary.standard};
+      background: ${(props) => contrast ? props.theme.colors.status.alertHover : props.theme.colors.primary.standard};
     }
   `}
 `
 
-export const ButtonAdd = styled.button`
-  ${() => css`
+export const ButtonAdd = styled.button<ThemeContrastProps>`
+  ${({ contrast }) => css`
     ${ButtonBase}
-    background: ${(props) => props.theme.colors.status.alert};
+    color: ${(props) => contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+    background: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.status.alert};
 
     &:hover {
-      background: ${(props) => props.theme.colors.status.alertHover};
+      background: ${(props) => contrast ? props.theme.colors.status.alertHover : props.theme.colors.status.alertHover};
     }
   `}
 `
 
-export const ButtonDelete = styled.button`
-  ${() => css`
+export const ButtonDelete = styled.button<ThemeContrastProps>`
+  ${({ contrast }) => css`
     ${ButtonBase}
-    background: ${(props) => props.theme.colors.status.error};
+    color: ${(props) => contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+    background: ${(props) => contrast ? props.theme.colors.base.standard : props.theme.colors.status.error};
 
     &:hover {
-      background: ${(props) => props.theme.colors.status.errorHover};
+      background: ${(props) => contrast ? props.theme.colors.status.alertHover : props.theme.colors.status.errorHover};
     }
   `}
 `

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useTheme } from '../../hooks/useTheme';
 
 import { MenuCategories } from "../../components/MenuCategories";
 import { ProductsProps, MenuTypes, MenuCategoriesRef } from '../../interface/Menu.types';
@@ -13,6 +14,9 @@ function SectionMenu({ itemsMenu }: MenuTypes) {
   const menuCategoriesRef = useRef<MenuCategoriesRef>(null);
   const totalQuantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const router = useRouter();
+  const { theme } = useTheme();
+  const themeContrast = theme === 'contrast'
+
   const handleItemSelect = (item: ProductsProps) => {
     menuCategoriesRef.current?.openModal(item);
   };
@@ -22,7 +26,10 @@ function SectionMenu({ itemsMenu }: MenuTypes) {
   return (
     <S.SectionMenu>
       {isAdmin && (
-        <S.ButtonRedirect onClick={() => router.push('/edition')}>
+        <S.ButtonRedirect 
+          contrast={themeContrast}
+          onClick={() => router.push('/edition')}
+        >
           Gerenciar Conteúdos
         </S.ButtonRedirect>
       )}

@@ -17,7 +17,7 @@ export const themeLight = {
     },
     status: {
       error: "#EF0519",
-      success: "",
+      success: "#02F102",
       warning: "",
       alert: "#007BFF",
       errorHover: "#B50211",

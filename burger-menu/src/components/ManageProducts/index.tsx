@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import { useTheme } from '../../hooks/useTheme';
 import { getMenu } from '../../services/menu'
 import { Modal } from '../Modal'
 import { Loading } from '../Loading'
@@ -10,6 +11,7 @@ import { MenuTypes, CategoryProps, ProductsProps } from '../../interface/Menu.ty
 import * as S from './styles'
 
 function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const { theme } = useTheme();
   const [price, setPrice] = useState('')
   const [loading, setLoading] = useState(false)
   const [productName, setProductName] = useState('')
@@ -23,6 +25,7 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
   const [showAllFilteredProducts, setShowAllFilteredProducts] = useState(false)
   const [selectedItem, setSelectedItem] = useState<ProductsProps | CategoryProps | null>(null);
 
+  const themeContrast = theme === 'contrast'
   const hashKey = '-O2wuwtlN6h_ql_cAQK8'
   const endpoint = `https://burgers-restaurant-af6f2-default-rtdb.firebaseio.com/products/${hashKey}.json`
 
@@ -225,20 +228,35 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
             {filteredProducts.length > 10 && (
               <React.Fragment>
                 {!showAllFilteredProducts ? (
-                  <S.ButtonSeeMore onClick={() => setShowAllFilteredProducts(true)}>Carregar mais produtos</S.ButtonSeeMore>
+                  <S.ButtonSeeMore 
+                    contrast={themeContrast}
+                    onClick={() => setShowAllFilteredProducts(true)}
+                  >
+                    Carregar mais produtos
+                  </S.ButtonSeeMore>
                 ) : (
-                  <S.ButtonSeeMore onClick={() => setShowAllFilteredProducts(false)}>Mostrar menos produtos</S.ButtonSeeMore>
+                  <S.ButtonSeeMore 
+                    contrast={themeContrast}
+                    onClick={() => setShowAllFilteredProducts(false)}
+                  >
+                    Mostrar menos produtos
+                  </S.ButtonSeeMore>
                 )}
               </React.Fragment>
             )}
 
-            <S.ButtonCreate onClick={() => setBuildNewProduct(true)}>Criar Novo Produto</S.ButtonCreate>
+            <S.ButtonCreate 
+              contrast={themeContrast}
+              onClick={() => setBuildNewProduct(true)}
+            >
+              Criar Novo Produto
+            </S.ButtonCreate>
             {buildNewProduct && (
               <Modal
               isOpen={buildNewProduct}
               onClose={closeModal}
             >
-              <S.ContainerModal>
+              <S.ContainerModal contrast={themeContrast}>
                 <form onSubmit={handleAddProduct}>
                   <label>
                     <span>Nome do Produto</span>
@@ -289,7 +307,12 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
                     </select>
                   </label>
                   <S.ContainerButtons>
-                    <S.ButtonCreate type='submit'>Criar Produto</S.ButtonCreate>
+                    <S.ButtonCreate 
+                      type='submit'
+                      contrast={themeContrast}
+                    >
+                      Criar Produto
+                    </S.ButtonCreate>
                   </S.ContainerButtons>
                 </form>
               </S.ContainerModal>
@@ -304,7 +327,7 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
           onClose={closeModal}
         >
           {selectedItem && (
-            <S.ContainerModal>
+            <S.ContainerModal contrast={themeContrast}>
               <Image 
                 src={selectedItem && selectedItem?.image && selectedItem?.image}
                 alt="menu"
@@ -352,8 +375,18 @@ function ManageProducts({ setUpdatePage }: { setUpdatePage: React.Dispatch<React
                     />
                   </label>
                   <S.ContainerButtons>
-                    <S.ButtonDelete onClick={handleDeleteProduct}>Excluir Produto</S.ButtonDelete>
-                    <S.ButtonAdd onClick={handleEditProduct}>Editar Produto</S.ButtonAdd> 
+                    <S.ButtonDelete 
+                      contrast={themeContrast}
+                      onClick={handleDeleteProduct}
+                    >
+                      Excluir Produto
+                    </S.ButtonDelete>
+                    <S.ButtonAdd 
+                      contrast={themeContrast}
+                      onClick={handleEditProduct}
+                    >
+                      Editar Produto
+                    </S.ButtonAdd> 
                   </S.ContainerButtons>
                 </>
               )}

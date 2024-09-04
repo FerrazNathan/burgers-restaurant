@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Loading } from '../Loading';
+import { useTheme } from '../../hooks/useTheme';
 import axios from 'axios';
 
 import * as S from './styles';
@@ -14,6 +15,8 @@ const LoginForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const { theme } = useTheme();
+  const themeContrast = theme === 'contrast'
 
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem('loggedInUser');
@@ -115,8 +118,14 @@ const LoginForm: React.FC = () => {
     return (
       <S.ContainerLoginForm>
         <h2>Você já está logado no sistema</h2>
-        <S.ContainerButtonLogout>
-          <button onClick={handleLogout}>Sair</button>
+        <S.ContainerButtonLogout 
+          contrast={themeContrast}
+        >
+          <button 
+            onClick={handleLogout}
+          >
+            Sair
+          </button>
         </S.ContainerButtonLogout>
         {message && <p>{message}</p>}
       </S.ContainerLoginForm>
@@ -132,7 +141,7 @@ const LoginForm: React.FC = () => {
           <p>Faça o login para poder utilizar o sistema</p>
           <S.ContainerForm onSubmit={handleSubmit}>
             {!isLoginMode && (
-              <S.ContainerEmailPassword>
+              <S.ContainerEmailPassword contrast={themeContrast}>
                 <span>Nome:</span>
                 <input 
                   type="text" 
@@ -143,7 +152,7 @@ const LoginForm: React.FC = () => {
                 />
               </S.ContainerEmailPassword>
             )}
-            <S.ContainerEmailPassword>
+            <S.ContainerEmailPassword contrast={themeContrast}>
               <span>Email:</span>
               <input 
                 type="email" 
@@ -153,7 +162,7 @@ const LoginForm: React.FC = () => {
                 required 
               />
             </S.ContainerEmailPassword>
-            <S.ContainerEmailPassword>
+            <S.ContainerEmailPassword contrast={themeContrast}>
               <span>Senha:</span>
               <input 
                 type="password" 
@@ -163,8 +172,10 @@ const LoginForm: React.FC = () => {
                 required 
               />
             </S.ContainerEmailPassword>
-            <S.ContainerButtonSubmit>
-              <button type="submit">{isLoginMode ? 'Entrar' : 'Criar Conta'}</button>
+            <S.ContainerButtonSubmit contrast={themeContrast}>
+              <button type="submit">
+                {isLoginMode ? 'Entrar' : 'Criar Conta'}
+              </button>
             </S.ContainerButtonSubmit>
           </S.ContainerForm>
           <S.ContainerButtonLogin>

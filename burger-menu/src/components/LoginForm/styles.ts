@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ThemeContrastProps {
+  contrast?: boolean;
+}
+
 export const ContainerSection = styled.section`
   margin: 0 auto;
   width: 100%;
@@ -40,7 +44,7 @@ export const ContainerForm = styled.form`
   }
 `
 
-export const ContainerEmailPassword = styled.label`
+export const ContainerEmailPassword = styled.label<ThemeContrastProps>`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -70,23 +74,24 @@ export const ContainerEmailPassword = styled.label`
   }
 `
 
-export const ContainerButtonSubmit = styled.div`
+export const ContainerButtonSubmit = styled.div<ThemeContrastProps>`
   width: 50%;
   margin: 0 auto;
 
   & button {
     width: 100%;
     padding: 0.8rem;
-    background: ${(props) => props.theme.colors.status.alert};
-    color: ${(props) => props.theme.colors.text.light};
+    background: ${(props) => props.contrast ? props.theme.colors.base.standard : props.theme.colors.status.alert};
+    color: ${(props) => props.contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
     border: none;
+    font-weight: 600;
     border-radius: ${(props) => props.theme.border.radius.sm};
     cursor: pointer;
     text-transform: uppercase;
     transition: background 0.3s;
     
     &:hover {
-      background: ${(props) => props.theme.colors.status.alertHover};
+      background: ${(props) => props.contrast ? props.theme.colors.status.alertHover : props.theme.colors.status.alertHover};
     }
   }
 `
@@ -99,6 +104,7 @@ export const ContainerButtonLogin = styled.div`
     background: none;
     width: 100%;
     border: none;
+    font-weight: 600;
     color: ${(props) => props.theme.colors.status.alert};
     cursor: pointer;
     transition: color 0.3s;
@@ -109,15 +115,16 @@ export const ContainerButtonLogin = styled.div`
   }
 `
 
-export const ContainerButtonLogout = styled.div`
+export const ContainerButtonLogout = styled.div<ThemeContrastProps>`
   width: 100px;
   margin: 1rem auto;
 
   & button {
     width: 100%;
     padding: 0.8rem;
-    background: ${(props) => props.theme.colors.status.error};
-    color: ${(props) => props.theme.colors.text.light};
+    background: ${(props) => props.contrast ? props.theme.colors.base.standard : props.theme.colors.status.error};
+    color: ${(props) => props.contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
+    font-weight: 600;
     border: none;
     border-radius: ${(props) => props.theme.border.radius.sm};
     cursor: pointer;
@@ -125,7 +132,7 @@ export const ContainerButtonLogout = styled.div`
     transition: background 0.3s;
     
     &:hover {
-      background: ${(props) => props.theme.colors.status.errorHover};
+      background: ${(props) => props.contrast ? props.theme.colors.status.alertHover : props.theme.colors.status.errorHover};
     }
   }
 `

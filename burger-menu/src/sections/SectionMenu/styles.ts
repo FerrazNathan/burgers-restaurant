@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface ThemeButtonProps {
+  contrast: boolean;
+}
+
 export const SectionMenu = styled.section`
   display: flex;
   flex-direction: column;
@@ -9,13 +13,14 @@ export const SectionMenu = styled.section`
   margin: 0 auto;
 `;
 
-export const ButtonRedirect = styled.button`
+export const ButtonRedirect = styled.button<ThemeButtonProps>`
   margin 0 auto;
   max-width: 220px;
   text-align: center;
   border: none;
-  background: #4F372F;
-  color: #fff;
+  font-weight: 600;
+  background: ${(props) => props.contrast ? props.theme.colors.base.standard : props.theme.colors.primary.light};
+  color: ${(props) => props.contrast ? props.theme.colors.background.standard : props.theme.colors.text.light};
   padding: 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -23,7 +28,7 @@ export const ButtonRedirect = styled.button`
   font-weight: 700;
 
   &:hover {
-    background: #63453b;
+    background: ${(props) => props.contrast ? props.theme.colors.status.alertHover : props.theme.colors.primary.standard};
   }
 `
 
