@@ -25,7 +25,7 @@ export const themeLight = {
     },
     base: {
       standard: "",
-      light: "",
+      light: "#525255",
     }
   },
   border: {

@@ -8,7 +8,8 @@ import { HeaderProps } from './Header.types'
 import ImageHeader from '../../public/header.png'
 import { GiShoppingCart } from "react-icons/gi";
 import { Loading } from '../Loading'
-
+import { ThemeSwitcher } from './components/SwitchTheme'
+ 
 import { RootState } from '../../store/store';
 import { useTheme } from '../../hooks/useTheme';
 import { useSelector, useDispatch } from 'react-redux';
@@ -26,6 +27,7 @@ function Header({ activePage }: HeaderProps ) {
 
   return (
     <S.ContainerHeader data-testid='HeaderContainer'>
+      <ThemeSwitcher />
       <S.ListMenuHeader showIconCart={showIconCart}>
         {HeaderData && HeaderData.map((item, index) => (
           <S.ItemMenuHeader key={index} data-testid='menu-item'>

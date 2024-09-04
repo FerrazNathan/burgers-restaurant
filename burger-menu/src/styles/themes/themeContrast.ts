@@ -24,7 +24,8 @@ export const themeContrast = {
       alertHover: "#F6FD4C",
     },
     base: {
-      standard: "#F5FF00"
+      standard: "#F5FF00",
+      light: "#5D5858",
     }
   },
   border: {

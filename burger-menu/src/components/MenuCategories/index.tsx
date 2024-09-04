@@ -153,7 +153,7 @@ const MenuCategories = forwardRef<MenuCategoriesRef, MenuTypes>(({ itemsMenu }, 
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {selectedItem && (
-          <S.ContainerModal>
+          <S.ContainerModal contrast={themeContrast}>
             <Image 
               src={selectedItem && selectedItem?.image && selectedItem?.image}
               alt="menu"

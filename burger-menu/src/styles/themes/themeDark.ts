@@ -27,6 +27,7 @@ export const themeDark = {
     },
     base: {
       standard: "#FAFAFA",
+      light: "#525255",
     }
   },
   border: {
