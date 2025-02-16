@@ -63,7 +63,6 @@ export const SwitchSlider = styled.button<HeaderSwitchSliderProps>`
     border-radius: 2rem;
     cursor: pointer;
     color: #ccc;
-    margin: 0 5px;
     position: relative;
 
     &::before{
@@ -75,6 +74,10 @@ export const SwitchSlider = styled.button<HeaderSwitchSliderProps>`
       border-radius: 28px;
       background: ${(props) => props.theme.colors.text.medium};
 
+      @media (max-width: 768px) {
+        width: 30px;
+        height: 10px;
+      }
     }
 
     &::after {
@@ -87,6 +90,11 @@ export const SwitchSlider = styled.button<HeaderSwitchSliderProps>`
       border-radius: 50%;
       background: ${(props) => contrast ? props.theme.colors.base.standard : active ? props.theme.colors.status.alert : props.theme.colors.text.light};
       box-shadow: ${(props) => props.theme.boxShadow.shadow};
+
+      @media (max-width: 768px) {
+        width: 15px;
+        height: 15px;
+      }
     }
 
   `}

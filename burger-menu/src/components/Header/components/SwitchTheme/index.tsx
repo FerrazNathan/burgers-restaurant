@@ -71,8 +71,9 @@ const ThemeSwitcher: React.FC = () => {
       <S.ButtonChangeTheme 
         contrast={themeContrast}
         onClick={switchToDark}
+        className='button-dark-mode'
       >
-        <FaRegMoon size={20} />
+        <FaRegMoon className='button-dark-mode' size={20} />
       </S.ButtonChangeTheme>
     </S.ContainerComponent>
   );
